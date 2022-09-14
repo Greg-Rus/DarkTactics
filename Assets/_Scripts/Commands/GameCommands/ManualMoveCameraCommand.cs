@@ -22,7 +22,6 @@ namespace _Scripts.Commands
                 GameContextRoot.CameraTarget.position += newPosition * K_TranslationSpeed * Time.deltaTime;
             }
 
-
             if (payload.RotationDirection.HasValue)
             {
                 var currentRotation = GameContextRoot.CameraTarget.localRotation.eulerAngles.y;
@@ -34,8 +33,10 @@ namespace _Scripts.Commands
             if (payload.ZoomDirection.HasValue)
             {
                 var transposer = GameContextRoot.VirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-                transposer.m_FollowOffset +=
-                    Vector3.up * Mathf.Clamp(transposer.m_FollowOffset.y + payload.ZoomDirection.Value, 4, 15);
+                var currentZoom = transposer.m_FollowOffset;
+                var zoomAmount = currentZoom.y;
+                var newZoom = Mathf.Clamp(zoomAmount + payload.ZoomDirection.Value * -1f, 4, 15);
+                transposer.m_FollowOffset = new Vector3(currentZoom.x, newZoom, currentZoom.z);
             }
         }
     }

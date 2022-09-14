@@ -73,15 +73,17 @@ namespace _Scripts
             
             if (Input.mouseScrollDelta != Vector2.zero)
             {
-                rotationDirection += 1f;
+                zoomDirection = Input.mouseScrollDelta.y;
+                Debug.Log(Input.mouseScrollDelta);
             }
 
-            if (cameraMoveOffset != Vector3.zero || rotationDirection != 0)
+            if (cameraMoveOffset != Vector3.zero || rotationDirection != 0 || zoomDirection != 0)
             {
                 Dispatcher.Dispatch(GameEvents.ManualCameraMove, new ManualCameraMovePayload
                 {
                     Translation = cameraMoveOffset,
-                    RotationDirection = rotationDirection
+                    RotationDirection = rotationDirection,
+                    ZoomDirection = zoomDirection
                 });
             }
         }

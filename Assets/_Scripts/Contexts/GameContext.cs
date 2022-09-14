@@ -31,7 +31,7 @@ namespace _Scripts
             injectionBinder.Bind<GridService>().ToSingleton()
                 .ToValue(new GridService(20, 20, 1)).CrossContext();
             injectionBinder.Bind<VirtualCameraController>().ToSingleton()
-                .ToValue(injectionBinder.injector.Inject(new VirtualCameraController(_view.VirtualCamera, _view.CameraTarget)));
+                .ToValue(new VirtualCameraController(_view.VirtualCamera, _view.CameraTarget));
 
             commandBinder.Bind(GameEvents.SpawnUnit).To<SpawnUnitCommand>();
             commandBinder.Bind(GameEvents.MouseClickGround)
