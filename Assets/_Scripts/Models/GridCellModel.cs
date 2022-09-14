@@ -1,6 +1,5 @@
-﻿
-using System.Collections.Generic;
-using strange.extensions.context.impl;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _Scripts.Models
@@ -8,24 +7,25 @@ namespace _Scripts.Models
     public class GridCellModel
     {
         private Vector2 _position;
-        private readonly HashSet<int> _entityIds; 
+        private readonly List<EntityData> _entityIds; 
 
         public GridCellModel(Vector2 position)
         {
             _position = position;
-            _entityIds = new HashSet<int>();
+            _entityIds = new List<EntityData>();
         }
 
-        public void SetEntityId(int entityId)
+        public void SetEntityId(int entityId, EntityTypes type)
         {
-            _entityIds.Add(entityId);
+            _entityIds.Add(new EntityData(){EntityId = entityId, EntityType = type});
         }
 
         public bool TryRemoveEntityId(int entityId)
         {
-            if (_entityIds.Contains(entityId))
+            var index = _entityIds.FindIndex(data => data.EntityId == entityId);
+            if (index != -1)
             {
-                _entityIds.Remove(entityId);
+                _entityIds.RemoveAt(index);
                 return true;
             }
 
