@@ -36,7 +36,7 @@ namespace _Scripts
             commandBinder.Bind(GameEvents.SpawnUnit).To<SpawnUnitCommand>();
             commandBinder.Bind(GameEvents.MouseClickGround)
                 .To<MoveSelectedUnitCommand>()
-                .To<SnapCameraToUnitDestination>()
+                //.To<SnapCameraToUnitDestination>() TODO: This was just a test. Ideally the camera should follow the unit so this should be requested by the unit itself.
                 .InSequence();
             commandBinder.Bind(GameEvents.MouseClickUnit).To<ProcessUnitClickCommand>();
             commandBinder.Bind(GameEvents.SelectUnit).To<SelectUnitCommand>();

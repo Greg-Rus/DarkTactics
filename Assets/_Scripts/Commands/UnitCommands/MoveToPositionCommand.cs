@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.Models;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
 using strange.extensions.mediation.impl;
@@ -11,7 +12,11 @@ namespace _Scripts.Commands
 {
     public class MoveToPositionCommand : EventCommand
     {
-        [Inject]  public UnitContextRoot RootView{get;set;}
+        [Inject]  public UnitContextRoot RootView {get;set;}
+        
+        [Inject] public GridService GridService {get;set;}
+        
+        [Inject] public UnitModel Model {get;set;}
 
         private const float K_RunningSpeed = 5f;
         private const float K_TurningSpeed = 5f;
@@ -20,10 +25,30 @@ namespace _Scripts.Commands
         {
             Debug.Log("Starting coroutine");
             RootView.StopAllCoroutines();
-            var destination = (Vector3)evt.data;
+            var destinationGridCellModel = (GridCellModel)evt.data;
+
+            if (IsCellWalkable(destinationGridCellModel) && IsCellInRange(destinationGridCellModel))
+            {
+                var cellWorldPosition = GridService.GridCoordinateToWorldPosition(destinationGridCellModel.Coordinates);
+                RootView.StartCoroutine(MoveToPosition(cellWorldPosition));
+                RootView.StartCoroutine(RotateToPosition(cellWorldPosition));
+            }
             
-            RootView.StartCoroutine(MoveToPosition(destination));
-            RootView.StartCoroutine(RotateToPosition(destination));
+            
+        }
+
+        private bool IsCellWalkable(GridCellModel cell)
+        {
+            return cell.Entities.Count == 0;
+        }
+
+        private bool IsCellInRange(GridCellModel cell)
+        {
+            var unitPosition = Model.OccupiedCellCoordinates;
+            var destinationPosition = cell.Coordinates;
+            var offset = destinationPosition - unitPosition;
+            var distance = offset.magnitude;
+            return distance <= Model.MovementRange;
         }
 
         private IEnumerator MoveToPosition(Vector3 destination)
@@ -46,6 +71,7 @@ namespace _Scripts.Commands
                 }
             }
             RootView.Animator.SetBool(AnimatorParameters.IsRunning, false);
+            Model.OccupiedCellCoordinates = GridService.WorldPositionToGridCoordinate(destination);
         }
 
         private IEnumerator RotateToPosition(Vector3 destination)

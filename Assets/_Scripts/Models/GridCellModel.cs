@@ -6,26 +6,26 @@ namespace _Scripts.Models
 {
     public class GridCellModel
     {
-        private Vector2 _position;
-        private readonly List<EntityData> _entityIds; 
+        public Vector2Int Coordinates;
+        public readonly List<EntityData> Entities; 
 
-        public GridCellModel(Vector2 position)
+        public GridCellModel(Vector2Int coordinates)
         {
-            _position = position;
-            _entityIds = new List<EntityData>();
+            Coordinates = coordinates;
+            Entities = new List<EntityData>();
         }
 
         public void SetEntityId(int entityId, EntityTypes type)
         {
-            _entityIds.Add(new EntityData(){EntityId = entityId, EntityType = type});
+            Entities.Add(new EntityData(){EntityId = entityId, EntityType = type});
         }
 
         public bool TryRemoveEntityId(int entityId)
         {
-            var index = _entityIds.FindIndex(data => data.EntityId == entityId);
+            var index = Entities.FindIndex(data => data.EntityId == entityId);
             if (index != -1)
             {
-                _entityIds.RemoveAt(index);
+                Entities.RemoveAt(index);
                 return true;
             }
 

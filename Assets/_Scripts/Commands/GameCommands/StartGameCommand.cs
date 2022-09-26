@@ -2,6 +2,7 @@ using _Scripts.EventPayloads;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
 using strange.extensions.dispatcher.eventdispatcher.api;
+using UnityEngine;
 
 namespace _Scripts.Commands
 {
@@ -12,9 +13,8 @@ namespace _Scripts.Commands
         public override void Execute()
         {
             GridService.Initialize();
-            Dispatcher.Dispatch(GameEvents.SpawnUnit, 1);
-            Dispatcher.Dispatch(GameEvents.SpawnUnit, 2);
-            
+            Dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload(){Id = 1, InitialPosition = new Vector2Int(1,0)});
+            Dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload(){Id = 2, InitialPosition = new Vector2Int(4,0)});
         }
     }
 }

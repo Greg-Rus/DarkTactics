@@ -19,10 +19,12 @@ namespace _Scripts.Commands
             }
 
             MouseClickGroundPayload payload = (MouseClickGroundPayload)evt.data;
-            var gridPosition = GridService.WorldPositionToWorldGridCell(payload.ClickPosition);
+            var gridCellModel = GridService.WorldPositionToGridCellModel(payload.ClickPosition);
+
+            if (gridCellModel == null) return;
 
             var unit = UnitRegistryService.GetUnitContextById(GameSessionModel.SelectedUnitId.Value);
-            unit.dispatcher.Dispatch(GameEvents.MoveUnit, gridPosition);
+            unit.dispatcher.Dispatch(GameEvents.MoveUnit, gridCellModel);
         }
     }
 }
