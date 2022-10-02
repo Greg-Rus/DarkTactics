@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
+using _Scripts.Helpers;
 using _Scripts.Models;
 using strange.extensions.command.impl;
-using strange.extensions.context.api;
-using strange.extensions.mediation.impl;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace _Scripts.Commands
@@ -15,6 +11,7 @@ namespace _Scripts.Commands
         [Inject]  public UnitContextRoot RootView {get;set;}
         
         [Inject] public GridService GridService {get;set;}
+        [Inject] public GridVisualsService GridVisualsService {get;set;}
         
         [Inject] public UnitModel Model {get;set;}
 
@@ -33,8 +30,6 @@ namespace _Scripts.Commands
                 RootView.StartCoroutine(MoveToPosition(cellWorldPosition));
                 RootView.StartCoroutine(RotateToPosition(cellWorldPosition));
             }
-            
-            
         }
 
         private bool IsCellWalkable(GridCellModel cell)
@@ -44,15 +39,24 @@ namespace _Scripts.Commands
 
         private bool IsCellInRange(GridCellModel cell)
         {
-            var unitPosition = Model.OccupiedCellCoordinates;
-            var destinationPosition = cell.Coordinates;
-            var offset = destinationPosition - unitPosition;
-            var distance = offset.magnitude;
-            return distance <= Model.MovementRange;
+            var isWalkable = false;
+            foreach (var cellModel in Model.WalkableCells)
+            {
+                if(cellModel == null) continue;
+                if (cellModel.Coordinates == cell.Coordinates)
+                {
+                    isWalkable = true;
+                    break;
+                }
+            }
+
+            return isWalkable;
         }
 
         private IEnumerator MoveToPosition(Vector3 destination)
         {
+            OnDeparture();
+            
             bool moving = true;
             RootView.Animator.SetBool(AnimatorParameters.IsRunning, true);
             while (moving)
@@ -70,8 +74,8 @@ namespace _Scripts.Commands
                     yield return null;
                 }
             }
-            RootView.Animator.SetBool(AnimatorParameters.IsRunning, false);
-            Model.OccupiedCellCoordinates = GridService.WorldPositionToGridCoordinate(destination);
+            
+            OnArrival(destination);
         }
 
         private IEnumerator RotateToPosition(Vector3 destination)
@@ -91,6 +95,21 @@ namespace _Scripts.Commands
                 yield return null;
             }
             RootView.transform.localRotation = targetRotation;
+        }
+
+        private void OnDeparture()
+        {
+            Model.OccupiedCellModel.Entities.Remove(Model.Id);
+            GridVisualsService.ClearWalkableGrid();
+        }
+
+        private void OnArrival(Vector3 destination)
+        {
+            RootView.Animator.SetBool(AnimatorParameters.IsRunning, false);
+            Model.OccupiedCellModel = GridService.WorldPositionToGridCellModel(destination);
+            Model.OccupiedCellModel.Entities.Add(Model.Id);
+            new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
+            GridVisualsService.DrawWalkableGrid(Model.WalkableCells);
         }
     }
 }

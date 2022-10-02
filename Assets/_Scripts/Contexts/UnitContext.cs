@@ -8,19 +8,20 @@ namespace _Scripts
 {
     public class UnitContext : MVCSContext
     {
+        [Inject] public GridService GridService {get;set;}
+        
         private readonly UnitContextRoot _view;
         private readonly int _id;
         private readonly UnitModel _model;
 
-        public UnitContext(UnitContextRoot view, bool autoMapping, int id, Vector2Int initialPosition) : base(view, autoMapping)
+        public UnitContext(UnitContextRoot view, bool autoMapping, int id) : base(view, autoMapping)
         {
             _view = view;
             _id = id;
             _model = new UnitModel()
             {
                 Id = _id,
-                MovementRange = 5,
-                OccupiedCellCoordinates = initialPosition
+                MovementRange = 5
             };
         }
 
@@ -33,7 +34,7 @@ namespace _Scripts
 
             commandBinder.Bind(GameEvents.MoveUnit).To<MoveToPositionCommand>();
             commandBinder.Bind(GameEvents.SelectUnit).To<ToggleSelectionCommand>();
-            commandBinder.Bind(ContextEvent.START).To<SetupUnitCommand>().Once();
+            commandBinder.Bind(GameEvents.SetupUnit).To<SetupUnitCommand>().Once();
         }
     }
 }

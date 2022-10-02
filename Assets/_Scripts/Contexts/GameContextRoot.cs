@@ -11,6 +11,7 @@ namespace _Scripts
         public PrefabConfig PrefabConfig;
         public DebugGridCellView DebugGridCellMarker;
         public GameObject DebugMousePointer;
+        public GridVisualView GridVisualView;
         
         [Header("Physics Layers")]
         public LayerMask GroundLayerMask;
@@ -19,6 +20,7 @@ namespace _Scripts
         [Header("Parents")]
         public Transform DebugRoot;
         public Transform UnitsRoot;
+        public Transform GridVisualsRoot;
 
         [Header("Camera")] 
         public Transform CameraTarget;

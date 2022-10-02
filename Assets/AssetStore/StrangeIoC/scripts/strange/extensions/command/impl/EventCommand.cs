@@ -31,6 +31,11 @@ using strange.extensions.pool.api;
 
 namespace strange.extensions.command.impl
 {
+	public class EventCommand<T> : EventCommand
+	{
+		public T Payload => (T)evt.data;
+	}
+	
 	public class EventCommand : Command
 	{
 		[Inject(ContextKeys.CONTEXT_DISPATCHER)]

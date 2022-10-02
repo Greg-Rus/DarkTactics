@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts.Models
@@ -10,7 +11,9 @@ namespace _Scripts.Models
     public class UnitModel
     {
         public int Id;
-        public Vector2Int OccupiedCellCoordinates;
+        public EntityTypes UnitType;
+        public GridCellModel OccupiedCellModel;
         public int MovementRange;
+        public GridCellModel[,] WalkableCells;
     }
 }

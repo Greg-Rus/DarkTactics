@@ -7,29 +7,22 @@ namespace _Scripts.Models
     public class GridCellModel
     {
         public Vector2Int Coordinates;
-        public readonly List<EntityData> Entities; 
+        public readonly HashSet<int> Entities; 
 
         public GridCellModel(Vector2Int coordinates)
         {
             Coordinates = coordinates;
-            Entities = new List<EntityData>();
+            Entities = new HashSet<int>();
         }
 
-        public void SetEntityId(int entityId, EntityTypes type)
+        public void SetEntityId(int entityId)
         {
-            Entities.Add(new EntityData(){EntityId = entityId, EntityType = type});
+            Entities.Add(entityId);
         }
 
         public bool TryRemoveEntityId(int entityId)
         {
-            var index = Entities.FindIndex(data => data.EntityId == entityId);
-            if (index != -1)
-            {
-                Entities.RemoveAt(index);
-                return true;
-            }
-
-            return false;
+            return Entities.Remove(entityId);
         }
     }
 }

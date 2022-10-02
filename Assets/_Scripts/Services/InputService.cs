@@ -74,7 +74,6 @@ namespace _Scripts
             if (Input.mouseScrollDelta != Vector2.zero)
             {
                 zoomDirection = Input.mouseScrollDelta.y;
-                Debug.Log(Input.mouseScrollDelta);
             }
 
             if (cameraMoveOffset != Vector3.zero || rotationDirection != 0 || zoomDirection != 0)

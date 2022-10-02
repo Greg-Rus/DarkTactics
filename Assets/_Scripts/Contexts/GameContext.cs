@@ -23,13 +23,15 @@ namespace _Scripts
             injectionBinder.Bind<GameContextRoot>().ToSingleton()
                 .ToValue(_view);
             injectionBinder.Bind<UnitRegistryService>().ToSingleton().CrossContext();
+            injectionBinder.Bind<GridService>().ToSingleton()
+                .ToValue(new GridService(20, 20, 1)).CrossContext();
+            injectionBinder.Bind<GridVisualsService>().ToSingleton()
+                .ToValue(new GridVisualsService(_view.GridVisualsRoot, _view.GridVisualView)).CrossContext();
             injectionBinder.Bind<PrefabConfig>().ToSingleton()
                 .ToValue(_view.PrefabConfig);
             injectionBinder.Bind<UnitModel>();
             injectionBinder.Bind<InputService>().ToSingleton().CrossContext();
             injectionBinder.Bind<GameSessionModel>().ToSingleton().CrossContext();
-            injectionBinder.Bind<GridService>().ToSingleton()
-                .ToValue(new GridService(20, 20, 1)).CrossContext();
             injectionBinder.Bind<VirtualCameraController>().ToSingleton()
                 .ToValue(new VirtualCameraController(_view.VirtualCamera, _view.CameraTarget));
 

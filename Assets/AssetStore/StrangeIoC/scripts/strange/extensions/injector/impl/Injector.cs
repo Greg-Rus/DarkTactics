@@ -124,7 +124,7 @@ namespace strange.extensions.injector.impl
 
 		public object Inject(object target)
 		{
-			return Inject (target, true);
+			return Inject (target, false);
 		}
 
 		public object Inject(object target, bool attemptConstructorInjection)
