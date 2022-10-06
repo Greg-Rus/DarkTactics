@@ -2,6 +2,8 @@
 {
     public enum UnitEvents
     {
-        UnitSelected
+        UnitSelected,
+        MoveActionSelected,
+        AttackActionSelected
     }
 }

@@ -16,7 +16,8 @@ namespace _Scripts.Commands
         {
             var worldPosition = GridService.GridCoordinateToWorldPosition(Payload.GridPosition);
             UnitContextRoot.transform.position = worldPosition;
-            UnitModel.MovementRange = Payload.MovementRange;
+            
+            UnitModel.InitializeWithSettings(Payload.Settings);
             UnitModel.OccupiedCellModel = GridService.GridCoordinateToGridCellModel(Payload.GridPosition);
 
             if (UnitModel.OccupiedCellModel == null)

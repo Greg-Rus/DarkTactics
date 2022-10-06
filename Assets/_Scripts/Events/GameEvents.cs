@@ -4,7 +4,7 @@ namespace _Scripts
     {
         SpawnUnit,
         SetupUnit,
-        MoveUnit,
+        GridCellSelected,
         MouseClickGround,
         MouseClickUnit,
         SelectUnit,

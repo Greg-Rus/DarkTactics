@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Develop.unity
+    path: Assets/_Scenes/Develop.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/AssetStore/StrangeIoC/examples/Assets/scenes/multiplecontexts/game.unity
-    guid: 63cc202a6aefd4364ab9d942a24c0716
+    path: Assets/_Scenes/MainUiScene.unity
+    guid: bba5e4c6de17cdb468a6804a96bcc518
   - enabled: 1
-    path: Assets/AssetStore/StrangeIoC/examples/Assets/scenes/multiplecontexts/social.unity
-    guid: ca117a9bbd0d14ec294e0e9ae05a2103
+    path: Assets/_Scenes/GameScene.unity
+    guid: 4555e963e8e84514d8c57617602a9333
   m_configObjects: {}

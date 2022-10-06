@@ -1,19 +1,20 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace _Scripts.Models
 {
-    public interface IUnitModel
-    {
-        
-    }
-    
     public class UnitModel
     {
         public int Id;
-        public EntityTypes UnitType;
+        public UnityTypes UnitType;
         public GridCellModel OccupiedCellModel;
         public int MovementRange;
         public GridCellModel[,] WalkableCells;
+        public UnitActionTypes[] SupportedActions;
+        public UnitActionTypes SelectedAction = UnitActionTypes.None;
+
+        public void InitializeWithSettings(UnitSettings settings)
+        {
+            UnitType = settings.Type;
+            MovementRange = settings.MovementRange;
+            SupportedActions = settings.Actions;
+        }
     }
 }

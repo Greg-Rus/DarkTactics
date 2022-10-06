@@ -27,8 +27,6 @@ namespace _Scripts
                 .ToValue(new GridService(20, 20, 1)).CrossContext();
             injectionBinder.Bind<GridVisualsService>().ToSingleton()
                 .ToValue(new GridVisualsService(_view.GridVisualsRoot, _view.GridVisualView)).CrossContext();
-            injectionBinder.Bind<PrefabConfig>().ToSingleton()
-                .ToValue(_view.PrefabConfig);
             injectionBinder.Bind<UnitModel>();
             injectionBinder.Bind<InputService>().ToSingleton().CrossContext();
             injectionBinder.Bind<GameSessionModel>().ToSingleton().CrossContext();
@@ -46,6 +44,7 @@ namespace _Scripts
             
             commandBinder.Bind(ContextEvent.START)
                 .To<InitializeServicesCommand>()
+                .To<LoadSubScenesCommand>()
                 .To<StartGameCommand>()
                 .InSequence()
                 .Once();

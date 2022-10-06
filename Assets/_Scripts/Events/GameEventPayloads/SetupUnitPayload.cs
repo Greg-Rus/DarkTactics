@@ -5,6 +5,6 @@ namespace _Scripts.EventPayloads
     public class SetupUnitPayload
     {
         public Vector2Int GridPosition;
-        public int MovementRange;
+        public UnitSettings Settings;
     }
 }

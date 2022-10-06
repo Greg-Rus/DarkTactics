@@ -7,8 +7,13 @@ namespace _Scripts
 {
     public class GameContextRoot : ContextView
     {
+        private void Awake()
+        {
+            context = new GameContext(this, true);
+            context.Start();
+        }
+
         [Header("Prefabs")]
-        public PrefabConfig PrefabConfig;
         public DebugGridCellView DebugGridCellMarker;
         public GameObject DebugMousePointer;
         public GridVisualView GridVisualView;

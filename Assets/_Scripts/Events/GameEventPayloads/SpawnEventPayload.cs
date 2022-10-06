@@ -6,5 +6,6 @@ namespace _Scripts.EventPayloads
     {
         public int Id;
         public Vector2Int InitialPosition;
+        public UnitSettings Settings;
     }
 }

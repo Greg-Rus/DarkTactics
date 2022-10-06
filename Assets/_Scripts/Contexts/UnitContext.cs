@@ -1,8 +1,7 @@
 using _Scripts.Commands;
+using _Scripts.Commands.UnitCommands;
 using _Scripts.Models;
-using strange.extensions.context.api;
 using strange.extensions.context.impl;
-using UnityEngine;
 
 namespace _Scripts
 {
@@ -32,9 +31,12 @@ namespace _Scripts
             injectionBinder.Bind<UnitModel>().ToSingleton().ToValue(_model);
             injectionBinder.injector.Inject(_view.AnimationEventHandler);
 
-            commandBinder.Bind(GameEvents.MoveUnit).To<MoveToPositionCommand>();
-            commandBinder.Bind(GameEvents.SelectUnit).To<ToggleSelectionCommand>();
+            commandBinder.Bind(GameEvents.GridCellSelected).To<MoveToPositionCommand>();
+            commandBinder.Bind(GameEvents.SelectUnit).To<ToggleUnitSelectionCommand>();
             commandBinder.Bind(GameEvents.SetupUnit).To<SetupUnitCommand>().Once();
+            
+            commandBinder.Bind(UnitEvents.MoveActionSelected).To<HandleMoveActionSelectedCommand>();
+            commandBinder.Bind(UnitEvents.AttackActionSelected).To<HandleAttackSelectionCommand>();
         }
     }
 }

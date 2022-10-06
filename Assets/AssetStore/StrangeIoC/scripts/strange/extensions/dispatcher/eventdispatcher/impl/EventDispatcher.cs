@@ -43,6 +43,7 @@ using strange.extensions.dispatcher.api;
 using strange.extensions.dispatcher.eventdispatcher.api;
 using strange.extensions.pool.api;
 using strange.extensions.pool.impl;
+	using UnityEngine;
 
 namespace strange.extensions.dispatcher.eventdispatcher.impl
 {

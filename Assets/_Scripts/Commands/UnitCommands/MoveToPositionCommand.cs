@@ -20,6 +20,8 @@ namespace _Scripts.Commands
 
         public override void Execute()
         {
+            if (Model.SelectedAction != UnitActionTypes.Move) return;
+            
             Debug.Log("Starting coroutine");
             RootView.StopAllCoroutines();
             var destinationGridCellModel = (GridCellModel)evt.data;
@@ -101,6 +103,7 @@ namespace _Scripts.Commands
         {
             Model.OccupiedCellModel.Entities.Remove(Model.Id);
             GridVisualsService.ClearWalkableGrid();
+            Model.SelectedAction = UnitActionTypes.None;
         }
 
         private void OnArrival(Vector3 destination)
@@ -108,8 +111,6 @@ namespace _Scripts.Commands
             RootView.Animator.SetBool(AnimatorParameters.IsRunning, false);
             Model.OccupiedCellModel = GridService.WorldPositionToGridCellModel(destination);
             Model.OccupiedCellModel.Entities.Add(Model.Id);
-            new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
-            GridVisualsService.DrawWalkableGrid(Model.WalkableCells);
         }
     }
 }
