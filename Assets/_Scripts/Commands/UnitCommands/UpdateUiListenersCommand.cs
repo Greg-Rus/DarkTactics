@@ -9,25 +9,23 @@ namespace _Scripts.Commands.UnitCommands
     public class UpdateUiListenersCommand : Command
     {
         private readonly bool shouldListen;
-        [Inject] public MainUiController MainUiController { private get; set; }
+        [Inject] public UiController UiController { private get; set; }
         [Inject(ContextKeys.CONTEXT_DISPATCHER)] public IEventDispatcher Dispatcher { private get; set; }
         [Inject] public UnitModel UnitModel { private get; set; }
 
         public override void Execute()
         {
-            MainUiController.RemoveAllListeners();
+            UiController.RemoveAllListeners();
             
-            foreach (var action in UnitModel.SupportedActions)
+            foreach (var action in UnitModel.Settings.Actions)
             {
                 switch (action)
                 {
                     case UnitActionTypes.Move:
-                        MainUiController.AddMoveActionListener(Dispatcher);
+                        UiController.AddMoveActionListener(Dispatcher);
                         break;
                     case UnitActionTypes.Attack:
-                        MainUiController.AddAttackActionListener(Dispatcher);
-                        break;
-                    case UnitActionTypes.EndTurn:
+                        UiController.AddAttackActionListener(Dispatcher);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

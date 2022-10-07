@@ -16,6 +16,12 @@ MonoBehaviour:
   - Type: 0
     MovementRange: 5
     Actions: 0100000002000000
+    BaseHitPoints: 12
+    BaseActionPoints: 2
+    BaseSpellPoints: 5
   - Type: 1
     MovementRange: 3
     Actions: 01000000
+    BaseHitPoints: 5
+    BaseActionPoints: 2
+    BaseSpellPoints: 9

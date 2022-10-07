@@ -17,5 +17,8 @@ namespace _Scripts
         public UnityTypes Type;
         public int MovementRange;
         public UnitActionTypes[] Actions;
+        public int BaseHitPoints;
+        public int BaseActionPoints;
+        public int BaseSpellPoints;
     }
 }

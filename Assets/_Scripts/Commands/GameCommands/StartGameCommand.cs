@@ -14,7 +14,7 @@ namespace _Scripts.Commands
         public IEventDispatcher Dispatcher { get; set; }
 
         [Inject] public GridService GridService { get; set; }
-        [Inject] public MainUiController MainUiController { private get; set; }
+        [Inject] public UiController UiController { private get; set; }
         [Inject] public UnitSettingsConfig UnitSettingsConfig { private get; set; }
 
         public override void Execute()

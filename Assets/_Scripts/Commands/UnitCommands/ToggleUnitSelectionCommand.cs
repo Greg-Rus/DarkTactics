@@ -20,6 +20,7 @@ namespace _Scripts.Commands
             if (isThisUnitActive)
             {
                 new UpdateUiListenersCommand().InjectWith(injectionBinder).Execute();
+                new UpdateUnitStatsUiCommand().InjectWith(injectionBinder).Execute();
             }
             else
             {

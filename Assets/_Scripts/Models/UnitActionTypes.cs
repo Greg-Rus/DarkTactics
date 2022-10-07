@@ -5,6 +5,5 @@
         None = 0,
         Move,
         Attack,
-        EndTurn
     }
 }

@@ -8,8 +8,8 @@ namespace _Scripts
         public MainUiContext(MainUIContextRoot view, bool autoMapping) : base(view, autoMapping)
         {
             injectionBinder.Bind<MainUIContextRoot>().ToSingleton().ToValue(view).CrossContext();
-            var controller = new MainUiController(view);
-            injectionBinder.Bind<MainUiController>().ToSingleton().ToValue(controller).CrossContext();
+            var controller = new UiController(view);
+            injectionBinder.Bind<UiController>().ToSingleton().ToValue(controller).CrossContext();
         }
     }
 }

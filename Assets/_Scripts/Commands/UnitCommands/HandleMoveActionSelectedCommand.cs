@@ -1,4 +1,5 @@
-﻿using _Scripts.Helpers;
+﻿using _Scripts.Controllers;
+using _Scripts.Helpers;
 using _Scripts.Models;
 using strange.extensions.command.impl;
 
@@ -8,11 +9,19 @@ namespace _Scripts.Commands.UnitCommands
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public GridVisualsService GridVisualsService { private get; set; }
+        [Inject] public UiController UiController { private get; set; }
+        [Inject] public UnitStateController UnitStateController { private get; set; }
         public override void Execute()
         {
-            UnitModel.SelectedAction = UnitActionTypes.Move;
-            new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
-            GridVisualsService.DrawWalkableGrid(UnitModel.WalkableCells);
+            if (UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Move))
+            {
+                UnitModel.SelectedAction = UnitActionTypes.Move;
+                new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
+                GridVisualsService.DrawWalkableGrid(UnitModel.WalkableCells);
+                UiController.MoveActionButton.Highlight.gameObject.SetActive(true);
+                UiController.HighlightSelectedAction(UnitActionTypes.Move);
+            }
+            
         }
     }
 }

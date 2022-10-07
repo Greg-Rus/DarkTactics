@@ -3,18 +3,20 @@ namespace _Scripts.Models
     public class UnitModel
     {
         public int Id;
-        public UnityTypes UnitType;
         public GridCellModel OccupiedCellModel;
-        public int MovementRange;
         public GridCellModel[,] WalkableCells;
-        public UnitActionTypes[] SupportedActions;
         public UnitActionTypes SelectedAction = UnitActionTypes.None;
+        public UnitSettings Settings;
+        public int HitPoints;
+        public int ActionPoints;
+        public int SpellPoints;
 
         public void InitializeWithSettings(UnitSettings settings)
         {
-            UnitType = settings.Type;
-            MovementRange = settings.MovementRange;
-            SupportedActions = settings.Actions;
+            Settings = settings;
+            HitPoints = settings.BaseHitPoints;
+            ActionPoints = settings.BaseActionPoints;
+            SpellPoints = settings.BaseSpellPoints;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Views;
 using strange.extensions.context.impl;
 using UnityEngine.UI;
 
@@ -6,8 +7,10 @@ namespace _Scripts
 {
     public class MainUIContextRoot : ContextView
     {
-        public Button MoveActionButton;
-        public Button AttackActionButton;
+        public ActionButtonView MoveActionButton;
+        public ActionButtonView AttackActionButton;
+        public Button EndTurnButton;
+        public UnitStatsView UnitStatsView;
 
         private void Awake()
         {
