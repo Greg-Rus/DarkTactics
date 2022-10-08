@@ -15,7 +15,7 @@ namespace _Scripts.Commands
         {
             var payload = (MouseClickUnitPayload)evt.data;
             var selectedUnitId = unitRegistryService.GetUnitIdByTransform(payload.UnitTransform);
-            crossContextDispatcher.Dispatch(GameEvents.SelectUnit, new SelectUnitPayload { SelectedUnitId = selectedUnitId });
+            crossContextDispatcher.Dispatch(GameEvents.SelectUnit, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
         }
     }
 }

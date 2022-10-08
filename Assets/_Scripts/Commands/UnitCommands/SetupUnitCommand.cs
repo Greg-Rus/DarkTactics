@@ -27,7 +27,7 @@ namespace _Scripts.Commands
             
             UnitModel.OccupiedCellModel.Entities.Add(UnitModel.Id);
 
-            dispatcher.Dispatch(GameEvents.SelectUnit, new SelectUnitPayload(){SelectedUnitId = -1});
+            dispatcher.Dispatch(GameEvents.SelectUnit, new UnitSelectedPayload(){SelectedUnitId = -1});
         }
     }
 }

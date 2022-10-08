@@ -1,14 +1,16 @@
 ﻿using System;
 using _Scripts.Models;
 using _Scripts.Views;
+using strange.extensions.context.api;
 using strange.extensions.dispatcher.eventdispatcher.api;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Scripts
 {
     public class UiController
     {
+        [Inject(ContextKeys.CROSS_CONTEXT_DISPATCHER)] public IEventDispatcher CrossContextDispatcher { private get; set; }
+        
         private readonly MainUIContextRoot view;
 
         public UiController(MainUIContextRoot view)
@@ -18,6 +20,14 @@ namespace _Scripts
 
         public ActionButtonView MoveActionButton => view.MoveActionButton;
         public ActionButtonView AttackActionButton => view.AttackActionButton;
+
+        public void Initialize()
+        {
+            view.EndTurnButton.onClick.AddListener(() => CrossContextDispatcher.Dispatch(GameEvents.EndTurn));
+            UnhighlightActions();
+            RemoveAllListeners();
+            ToggleUnitStats(false);
+        }
 
         public void AddMoveActionListener(IEventDispatcher dispatcher)
         {
@@ -115,6 +125,14 @@ namespace _Scripts
             view.UnitStatsView.SpellPointsOfMax.text = $"{currentSp}/{maxSp}";
         }
         
-        
+        public void ToggleUnitStats(bool shouldShow)
+        {
+            view.UnitStatsView.gameObject.SetActive(shouldShow);
+        }
+
+        public void UpdateTurnNumber(int turnNumber)
+        {
+            view.TurnNumber.text = $"Turn: {turnNumber}";
+        }
     }
 }

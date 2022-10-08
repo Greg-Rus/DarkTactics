@@ -41,6 +41,7 @@ namespace _Scripts
             commandBinder.Bind(GameEvents.MouseClickUnit).To<ProcessUnitClickCommand>();
             commandBinder.Bind(GameEvents.SelectUnit).To<SelectUnitCommand>();
             commandBinder.Bind(GameEvents.ManualCameraMove).To<ManualMoveCameraCommand>().Pooled();
+            commandBinder.Bind(GameEvents.EndTurn).To<EndTurnCommand>();
             
             commandBinder.Bind(ContextEvent.START)
                 .To<InitializeServicesCommand>()

@@ -34,6 +34,7 @@ namespace _Scripts
             commandBinder.Bind(GameEvents.GridCellSelected).To<PerformMoveActionCommand>();
             commandBinder.Bind(GameEvents.SelectUnit).To<ToggleUnitSelectionCommand>();
             commandBinder.Bind(GameEvents.SetupUnit).To<SetupUnitCommand>().Once();
+            commandBinder.Bind(GameEvents.EndTurn).To<StartNewTurnCommand>();
             
             commandBinder.Bind(UiEvents.MoveActionSelected).To<HandleMoveActionSelectedCommand>();
             commandBinder.Bind(UiEvents.AttackActionSelected).To<HandleAttackSelectionCommand>();

@@ -113,7 +113,7 @@ namespace _Scripts.Commands
             RootView.Animator.SetBool(AnimatorParameters.IsRunning, false);
             Model.OccupiedCellModel = GridService.WorldPositionToGridCellModel(destination);
             Model.OccupiedCellModel.Entities.Add(Model.Id);
-            new UpdateUnitStatsUiCommand().InjectWith(injectionBinder).Execute();
+            new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
             UiController.UnhighlightActions();
         }
     }

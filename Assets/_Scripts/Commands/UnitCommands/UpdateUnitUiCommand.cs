@@ -4,7 +4,7 @@ using strange.extensions.command.impl;
 
 namespace _Scripts.Commands.UnitCommands
 {
-    public class UpdateUnitStatsUiCommand : Command
+    public class UpdateUnitUiCommand : Command
     {
         [Inject] public UiController UiController { private get; set; }
         [Inject] public UnitModel UnitModel { private get; set; }

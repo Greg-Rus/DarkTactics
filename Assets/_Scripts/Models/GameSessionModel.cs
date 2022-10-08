@@ -3,5 +3,6 @@
     public class GameSessionModel
     {
         public int? SelectedUnitId;
+        public int TurnNumber;
     }
 }

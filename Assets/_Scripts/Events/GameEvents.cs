@@ -8,6 +8,7 @@ namespace _Scripts
         MouseClickGround,
         MouseClickUnit,
         SelectUnit,
-        ManualCameraMove
+        ManualCameraMove,
+        EndTurn
     }
 }

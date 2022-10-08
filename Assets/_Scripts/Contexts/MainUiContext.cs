@@ -9,6 +9,7 @@ namespace _Scripts
         {
             injectionBinder.Bind<MainUIContextRoot>().ToSingleton().ToValue(view).CrossContext();
             var controller = new UiController(view);
+            controller.Initialize();
             injectionBinder.Bind<UiController>().ToSingleton().ToValue(controller).CrossContext();
         }
     }
