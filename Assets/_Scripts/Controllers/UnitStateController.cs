@@ -12,7 +12,7 @@ namespace _Scripts.Controllers
         public bool CanPerformAction(UnitActionTypes action)
         {
             var supportsAction = UnitModel.Settings.Actions.Contains(action);
-            var hasEnoughActionPoints = UnitModel.ActionPoints >= ActionSettingsConfig.GetActionCost(action);
+            var hasEnoughActionPoints = UnitModel.State.ActionPoints >= ActionSettingsConfig.GetActionCost(action);
             return supportsAction && hasEnoughActionPoints;
         }
 
@@ -20,7 +20,7 @@ namespace _Scripts.Controllers
         {
             if (CanPerformAction(action))
             {
-                UnitModel.ActionPoints -= ActionSettingsConfig.GetActionCost(action);
+                UnitModel.State.ActionPoints -= ActionSettingsConfig.GetActionCost(action);
                 return true;
             }
             else
@@ -31,17 +31,17 @@ namespace _Scripts.Controllers
 
         public void ChangeUnitHitPointsByAmount(int changeAmount)
         {
-            UnitModel.HitPoints = Math.Max(UnitModel.HitPoints + changeAmount, 0);
+            UnitModel.State.HitPoints = Math.Max(UnitModel.State.HitPoints + changeAmount, 0);
         }
         
         public void ChangeUnitActionPointsByAmount(int changeAmount)
         {
-            UnitModel.ActionPoints = Math.Max(UnitModel.ActionPoints + changeAmount, 0);
+            UnitModel.State.ActionPoints = Math.Max(UnitModel.State.ActionPoints + changeAmount, 0);
         }
 
         public void ChangeUnitSpellPointsByAmount(int changeAmount)
         {
-            UnitModel.SpellPoints = Math.Max(UnitModel.SpellPoints + changeAmount, 0);
+            UnitModel.State.SpellPoints = Math.Max(UnitModel.State.SpellPoints + changeAmount, 0);
         }
     }
 }

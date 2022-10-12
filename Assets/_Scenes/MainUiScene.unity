@@ -241,6 +241,7 @@ MonoBehaviour:
   MoveActionButton: {fileID: 7095012137516196212}
   AttackActionButton: {fileID: 1653644302}
   UnitStatsView: {fileID: 1315681852}
+  ActionsBarContainer: {fileID: 1147047671}
   EndTurnButton: {fileID: 1322136619}
   TurnNumber: {fileID: 710827948}
 --- !u!1 &78280864

@@ -23,7 +23,7 @@ namespace _Scripts
 
         public void Initialize()
         {
-            view.EndTurnButton.onClick.AddListener(() => CrossContextDispatcher.Dispatch(GameEvents.EndTurn));
+            view.EndTurnButton.onClick.AddListener(() => CrossContextDispatcher.Dispatch(GameEvents.EndPlayerTurn));
             UnhighlightActions();
             RemoveAllListeners();
             ToggleUnitStats(false);
@@ -128,6 +128,16 @@ namespace _Scripts
         public void ToggleUnitStats(bool shouldShow)
         {
             view.UnitStatsView.gameObject.SetActive(shouldShow);
+        }
+
+        public void ToggleActionsBar(bool shouldShow)
+        {
+            view.ActionsBarContainer.SetActive(shouldShow);
+        }
+        
+        public void ToggleEndTurnButton(bool shouldShow)
+        {
+            view.EndTurnButton.gameObject.SetActive(shouldShow);
         }
 
         public void UpdateTurnNumber(int turnNumber)

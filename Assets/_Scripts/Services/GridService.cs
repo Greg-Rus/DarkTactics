@@ -96,7 +96,6 @@ namespace _Scripts
                         cellModel = null;
                     }
 
-                    Debug.Log($"x{x}, y{y}");
                     cells[x + range, y + range] = cellModel;
                 }
             }

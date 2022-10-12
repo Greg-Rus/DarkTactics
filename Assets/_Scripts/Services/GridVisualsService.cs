@@ -38,11 +38,8 @@ namespace _Scripts
             if (walkableCellModels.Length > freeViews.Count)
             {
                 SpawnViews(walkableCellModels.Length - freeViews.Count);
-                Debug.Log($"Walkable cells: {walkableCellModels.Length}. Free views {freeViews.Count}");
             }
-
-            Debug.Log($"Updated view count {freeViews.Count}");
-
+            
             for (int x = 0; x <= walkableCellModels.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= walkableCellModels.GetUpperBound(1); y++)

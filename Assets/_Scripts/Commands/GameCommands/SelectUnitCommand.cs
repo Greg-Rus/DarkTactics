@@ -15,6 +15,8 @@ namespace _Scripts.Commands
             GameSessionModel.SelectedUnitId = selectedUnitId;
 
             UiController.ToggleUnitStats(true);
+            UiController.ToggleActionsBar(true);
+            UiController.UnhighlightActions();
         }
     }
 }

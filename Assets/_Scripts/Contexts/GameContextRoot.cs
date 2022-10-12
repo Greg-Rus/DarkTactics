@@ -21,6 +21,7 @@ namespace _Scripts
         [Header("Physics Layers")]
         public LayerMask GroundLayerMask;
         public LayerMask UnitLayerMask;
+        public LayerMask EnemyLayerMask;
         
         [Header("Parents")]
         public Transform DebugRoot;

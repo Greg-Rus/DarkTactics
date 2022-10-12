@@ -7,14 +7,14 @@ namespace _Scripts.Commands
 {
     public class ProcessUnitClickCommand : EventCommand
     {
-        [Inject] public UnitRegistryService unitRegistryService { get; set; }
+        [Inject] public EntityRegistryService EntityRegistryService { get; set; }
         [Inject(ContextKeys.CROSS_CONTEXT_DISPATCHER)] public IEventDispatcher crossContextDispatcher { get; set; }
         
 
         public override void Execute()
         {
             var payload = (MouseClickUnitPayload)evt.data;
-            var selectedUnitId = unitRegistryService.GetUnitIdByTransform(payload.UnitTransform);
+            var selectedUnitId = EntityRegistryService.GetEntityIdByTransform(payload.UnitTransform);
             crossContextDispatcher.Dispatch(GameEvents.SelectUnit, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
         }
     }

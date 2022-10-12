@@ -12,9 +12,14 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.9/Runtime/Behaviours/CinemachineVirtualCamera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/43/431a295e/IList`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/94/2b126b24/Nullable`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/26/e9191c59/WaitUntil.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/2e/a5dfb722/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/4c/ade3ff25/WaitForSeconds.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/4f/3435eddd/YieldInstruction.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/66/7667425b/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/69/464a3eff/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/da/7bf290ed/CustomYieldInstruction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6f241a2e14b34ed68c274db70b771c4826c00/54/b5693bc9/Animator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -54,10 +59,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="7200">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8548">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="7200" />
+      <option name="pid" value="8548" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -91,6 +96,11 @@
       <workItem from="1665046970183" duration="7526000" />
       <workItem from="1665148270059" duration="12704000" />
       <workItem from="1665218689460" duration="4557000" />
+      <workItem from="1665241838718" duration="1397000" />
+      <workItem from="1665310725168" duration="6879000" />
+      <workItem from="1665327263447" duration="2356000" />
+      <workItem from="1665428281116" duration="3127000" />
+      <workItem from="1665603805261" duration="4025000" />
     </task>
     <servers />
   </component>
@@ -107,30 +117,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Scripts/Commands/GameCommands/SelectUnitCommand.cs</url>
-          <line>12</line>
-          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Commands\GameCommands\SelectUnitCommand.cs" initialLine="15" containingFunctionPresentation="method 'Execute'">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Commands/UnitCommands/RotateToWorldPositionCommandAsync.cs</url>
+          <line>17</line>
+          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Commands\UnitCommands\RotateToWorldPositionCommandAsync.cs" initialLine="17" containingFunctionPresentation="method 'Execute'">
             <startOffsets>
-              <option value="392" />
+              <option value="556" />
             </startOffsets>
             <endOffsets>
-              <option value="446" />
+              <option value="609" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Scripts/Commands/UnitCommands/ToggleUnitSelectionCommand.cs</url>
-          <line>15</line>
-          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Commands\UnitCommands\ToggleUnitSelectionCommand.cs" initialLine="16" containingFunctionPresentation="method 'Execute'">
-            <startOffsets>
-              <option value="521" />
-            </startOffsets>
-            <endOffsets>
-              <option value="573" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

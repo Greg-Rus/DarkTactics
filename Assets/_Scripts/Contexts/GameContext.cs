@@ -22,11 +22,12 @@ namespace _Scripts
                 .ToValue(mediator);
             injectionBinder.Bind<GameContextRoot>().ToSingleton()
                 .ToValue(_view);
-            injectionBinder.Bind<UnitRegistryService>().ToSingleton().CrossContext();
+            injectionBinder.Bind<EntityRegistryService>().ToSingleton().CrossContext();
             injectionBinder.Bind<GridService>().ToSingleton()
                 .ToValue(new GridService(20, 20, 1)).CrossContext();
             injectionBinder.Bind<GridVisualsService>().ToSingleton()
                 .ToValue(new GridVisualsService(_view.GridVisualsRoot, _view.GridVisualView)).CrossContext();
+            injectionBinder.Bind<CoroutineService>().ToSingleton();
             injectionBinder.Bind<UnitModel>();
             injectionBinder.Bind<InputService>().ToSingleton().CrossContext();
             injectionBinder.Bind<GameSessionModel>().ToSingleton().CrossContext();
@@ -39,9 +40,14 @@ namespace _Scripts
                 //.To<SnapCameraToUnitDestination>() TODO: This was just a test. Ideally the camera should follow the unit so this should be requested by the unit itself.
                 .InSequence();
             commandBinder.Bind(GameEvents.MouseClickUnit).To<ProcessUnitClickCommand>();
+            commandBinder.Bind(GameEvents.MouseClickEnemy).To<ProcessEnemyClickCommand>();
             commandBinder.Bind(GameEvents.SelectUnit).To<SelectUnitCommand>();
             commandBinder.Bind(GameEvents.ManualCameraMove).To<ManualMoveCameraCommand>().Pooled();
-            commandBinder.Bind(GameEvents.EndTurn).To<EndTurnCommand>();
+            
+            commandBinder.Bind(GameEvents.StartPlayerTurn).To<StartPlayerTurnCommand>();
+            commandBinder.Bind(GameEvents.EndPlayerTurn).To<EndPlayerTurnCommand>();
+            commandBinder.Bind(GameEvents.StartEnemyTurn).To<StartEnemyTurnCommand>();
+            commandBinder.Bind(GameEvents.EndEnemyTurn).To<EndEnemyTurnCommand>();
             
             commandBinder.Bind(ContextEvent.START)
                 .To<InitializeServicesCommand>()

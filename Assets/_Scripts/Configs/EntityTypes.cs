@@ -2,6 +2,7 @@
 {
     public enum EntityTypes
     {
-        Unit
+        PlayerUnit,
+        EnemyUnit
     }
 }

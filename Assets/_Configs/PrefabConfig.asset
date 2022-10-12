@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fbf6a18f6b4094838f12dc3b82ac3e, type: 3}
   m_Name: PrefabConfig
   m_EditorClassIdentifier: 
-  Unit: {fileID: 8606223180666376226, guid: bed046886226d3d4bb6af0279dd4d5df, type: 3}
+  UnitPrefabMap:
+  - UnitTypes: 0000000001000000
+    UnitPrefab: {fileID: 8606223180666376226, guid: bed046886226d3d4bb6af0279dd4d5df,
+      type: 3}
+  - UnitTypes: 02000000
+    UnitPrefab: {fileID: 7084521827219833061, guid: e0873d41fdd85b14783c9ec2ef7c5230,
+      type: 3}

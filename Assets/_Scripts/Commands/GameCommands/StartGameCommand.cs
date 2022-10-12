@@ -2,37 +2,42 @@ using System.Linq;
 using _Scripts.EventPayloads;
 using _Scripts.Models;
 using strange.extensions.command.impl;
-using strange.extensions.context.api;
-using strange.extensions.dispatcher.eventdispatcher.api;
 using UnityEngine;
 
 namespace _Scripts.Commands
 {
     public class StartGameCommand : EventCommand
     {
-        [Inject(ContextKeys.CONTEXT_DISPATCHER)]
-        public IEventDispatcher Dispatcher { get; set; }
-
         [Inject] public GridService GridService { get; set; }
-        [Inject] public UiController UiController { private get; set; }
         [Inject] public UnitSettingsConfig UnitSettingsConfig { private get; set; }
+        [Inject] public EntityRegistryService EntityRegistryService { private get; set; }
 
         public override void Execute()
         {
             GridService.Initialize();
-            Dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
+            dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
                 {
-                    Id = 1,
+                    Id = EntityRegistryService.NextEntityId,
                     InitialPosition = new Vector2Int(1, 0),
-                    Settings = UnitSettingsConfig.UnitSettings.First(config => config.Type == UnityTypes.TestUnit)
+                    Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestUnit)
                 }
             );
-            Dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
+            
+            dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
             {
-                Id = 2,
+                Id = EntityRegistryService.NextEntityId,
                 InitialPosition = new Vector2Int(4, 0),
-                Settings = UnitSettingsConfig.UnitSettings.First(config => config.Type == UnityTypes.TestNoAttackUnit)
+                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestNoAttackUnit)
             });
+            
+            dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
+            {
+                Id = EntityRegistryService.NextEntityId,
+                InitialPosition = new Vector2Int(2, 4),
+                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestEnemy)
+            });
+            
+            dispatcher.Dispatch(GameEvents.StartPlayerTurn);
         }
     }
 }

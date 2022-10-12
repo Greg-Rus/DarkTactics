@@ -7,7 +7,7 @@ namespace _Scripts.Commands
 {
     public class MoveSelectedUnitCommand : EventCommand
     {
-        [Inject] public UnitRegistryService UnitRegistryService {get;set;}
+        [Inject] public EntityRegistryService EntityRegistryService {get;set;}
         [Inject] public GameSessionModel GameSessionModel {get;set;}
         [Inject] public GridService GridService {get;set;}
         public override void Execute()
@@ -23,7 +23,7 @@ namespace _Scripts.Commands
 
             if (gridCellModel == null) return;
 
-            var unit = UnitRegistryService.GetUnitContextById(GameSessionModel.SelectedUnitId.Value);
+            var unit = EntityRegistryService.GetEntityContextById(GameSessionModel.SelectedUnitId.Value);
             unit.dispatcher.Dispatch(GameEvents.GridCellSelected, gridCellModel);
         }
     }

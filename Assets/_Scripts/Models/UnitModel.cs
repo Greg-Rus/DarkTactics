@@ -7,16 +7,21 @@ namespace _Scripts.Models
         public GridCellModel[,] WalkableCells;
         public UnitActionTypes SelectedAction = UnitActionTypes.None;
         public UnitSettings Settings;
-        public int HitPoints;
-        public int ActionPoints;
-        public int SpellPoints;
+        public UnitModelState State;
 
         public void InitializeWithSettings(UnitSettings settings)
         {
             Settings = settings;
-            HitPoints = settings.BaseHitPoints;
-            ActionPoints = settings.BaseActionPoints;
-            SpellPoints = settings.BaseSpellPoints;
+            State.HitPoints = settings.BaseHitPoints;
+            State.ActionPoints = settings.BaseActionPoints;
+            State.SpellPoints = settings.BaseSpellPoints;
+        }
+
+        public struct UnitModelState
+        {
+            public int HitPoints;
+            public int ActionPoints;
+            public int SpellPoints;
         }
     }
 }

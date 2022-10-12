@@ -12,9 +12,9 @@ namespace _Scripts.Commands.UnitCommands
 
         public override void Execute()
         {
-            UiController.UpdateUnitHitPoints(UnitModel.HitPoints, UnitModel.Settings.BaseHitPoints);
-            UiController.UpdateUnitActionPoints(UnitModel.ActionPoints, UnitModel.Settings.BaseActionPoints);
-            UiController.UpdateUnitSpellPoints(UnitModel.SpellPoints, UnitModel.Settings.BaseSpellPoints);
+            UiController.UpdateUnitHitPoints(UnitModel.State.HitPoints, UnitModel.Settings.BaseHitPoints);
+            UiController.UpdateUnitActionPoints(UnitModel.State.ActionPoints, UnitModel.Settings.BaseActionPoints);
+            UiController.UpdateUnitSpellPoints(UnitModel.State.SpellPoints, UnitModel.Settings.BaseSpellPoints);
             
             foreach (var action in UnitModel.Settings.Actions)
             {

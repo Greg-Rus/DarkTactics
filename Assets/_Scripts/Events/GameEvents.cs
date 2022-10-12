@@ -9,6 +9,10 @@ namespace _Scripts
         MouseClickUnit,
         SelectUnit,
         ManualCameraMove,
-        EndTurn
+        StartPlayerTurn,
+        EndPlayerTurn,
+        StartEnemyTurn,
+        EndEnemyTurn,
+        MouseClickEnemy
     }
 }

@@ -13,6 +13,7 @@ namespace _Scripts
         public ActionButtonView MoveActionButton;
         public ActionButtonView AttackActionButton;
         public UnitStatsView UnitStatsView;
+        public GameObject ActionsBarContainer;
         
         [Header("Top Hud")]
         public Button EndTurnButton;

@@ -27,5 +27,6 @@ namespace _Scripts
 
         public LayerMask GroundLayerMask => _view.GroundLayerMask;
         public LayerMask UnitLayerMask => _view.UnitLayerMask;
+        public LayerMask EnemyLayerMask => _view.EnemyLayerMask;
     }
 }

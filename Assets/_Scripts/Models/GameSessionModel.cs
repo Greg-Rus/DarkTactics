@@ -4,5 +4,6 @@
     {
         public int? SelectedUnitId;
         public int TurnNumber;
+        public bool PlayersTurn;
     }
 }

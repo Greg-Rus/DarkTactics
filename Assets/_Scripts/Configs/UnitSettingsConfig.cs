@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _Scripts.Models;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Scripts
 {
@@ -9,12 +10,22 @@ namespace _Scripts
     public class UnitSettingsConfig : ScriptableObject
     {
         public UnitSettings[] UnitSettings;
+
+        private void OnValidate()
+        {
+            foreach (var unitSetting in UnitSettings)
+            {
+                unitSetting.Name = unitSetting.UnitType.ToString();
+            }
+        }
     }
 
     [Serializable]
     public class UnitSettings
     {
-        public UnityTypes Type;
+        [HideInInspector] public string Name;
+        public EntityTypes EntityType;
+        public UnitTypes UnitType;
         public int MovementRange;
         public UnitActionTypes[] Actions;
         public int BaseHitPoints;
