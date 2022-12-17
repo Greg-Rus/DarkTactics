@@ -2,12 +2,11 @@
 {
     public enum UnitEvents
     {
+        SetupUnit,
         UnitSelected,
         EnemySelected,
+        GridCellSelected,
         TurnStarted,
-        SpellCastShoot,
-        SpellCastFinished,
-        AttackAnimationShoot,
-        AttackAnimationFinished
+        HitTaken,
     }
 }

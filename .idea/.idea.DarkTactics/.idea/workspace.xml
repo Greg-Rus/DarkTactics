@@ -59,10 +59,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8548">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="8548" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -100,7 +100,13 @@
       <workItem from="1665310725168" duration="6879000" />
       <workItem from="1665327263447" duration="2356000" />
       <workItem from="1665428281116" duration="3127000" />
-      <workItem from="1665603805261" duration="4025000" />
+      <workItem from="1665603805261" duration="4986000" />
+      <workItem from="1665832124804" duration="9187000" />
+      <workItem from="1665911190087" duration="4816000" />
+      <workItem from="1667656626047" duration="5689000" />
+      <workItem from="1667770513980" duration="3456000" />
+      <workItem from="1668338540452" duration="597000" />
+      <workItem from="1671282159384" duration="1105000" />
     </task>
     <servers />
   </component>
@@ -117,17 +123,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Scripts/Commands/UnitCommands/RotateToWorldPositionCommandAsync.cs</url>
-          <line>17</line>
-          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Commands\UnitCommands\RotateToWorldPositionCommandAsync.cs" initialLine="17" containingFunctionPresentation="method 'Execute'">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Views/ProjectileView.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Views\ProjectileView.cs" initialLine="14" containingFunctionPresentation="method 'OnCollisionEnter'">
             <startOffsets>
-              <option value="556" />
+              <option value="619" />
             </startOffsets>
             <endOffsets>
-              <option value="609" />
+              <option value="713" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="34" />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

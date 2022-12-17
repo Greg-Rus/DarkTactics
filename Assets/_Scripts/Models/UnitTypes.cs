@@ -3,7 +3,7 @@
     public enum UnitTypes
     {
         TestUnit,
-        TestNoAttackUnit,
+        TestLongRangeUnit,
         TestEnemy
     }
 }

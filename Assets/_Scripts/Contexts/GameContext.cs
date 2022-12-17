@@ -28,6 +28,7 @@ namespace _Scripts
             injectionBinder.Bind<GridVisualsService>().ToSingleton()
                 .ToValue(new GridVisualsService(_view.GridVisualsRoot, _view.GridVisualView)).CrossContext();
             injectionBinder.Bind<CoroutineService>().ToSingleton();
+            injectionBinder.Bind<ProjectileFactory>().ToSingleton().CrossContext();
             injectionBinder.Bind<UnitModel>();
             injectionBinder.Bind<InputService>().ToSingleton().CrossContext();
             injectionBinder.Bind<GameSessionModel>().ToSingleton().CrossContext();
@@ -40,8 +41,8 @@ namespace _Scripts
                 //.To<SnapCameraToUnitDestination>() TODO: This was just a test. Ideally the camera should follow the unit so this should be requested by the unit itself.
                 .InSequence();
             commandBinder.Bind(GameEvents.MouseClickUnit).To<ProcessUnitClickCommand>();
+ 
             commandBinder.Bind(GameEvents.MouseClickEnemy).To<ProcessEnemyClickCommand>();
-            commandBinder.Bind(GameEvents.SelectUnit).To<SelectUnitCommand>();
             commandBinder.Bind(GameEvents.ManualCameraMove).To<ManualMoveCameraCommand>().Pooled();
             
             commandBinder.Bind(GameEvents.StartPlayerTurn).To<StartPlayerTurnCommand>();

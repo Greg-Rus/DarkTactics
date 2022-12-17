@@ -31,15 +31,15 @@ namespace _Scripts
 
         public void AddMoveActionListener(IEventDispatcher dispatcher)
         {
-            SetupButton(MoveActionButton.Button, dispatcher, UiEvents.MoveActionSelected);
+            SetupButton(MoveActionButton.Button, dispatcher, InputEvents.MoveActionSelected);
         }
         
         public void AddAttackActionListener(IEventDispatcher dispatcher)
         {
-            SetupButton(AttackActionButton.Button, dispatcher, UiEvents.AttackActionSelected);
+            SetupButton(AttackActionButton.Button, dispatcher, InputEvents.AttackActionSelected);
         }
 
-        private void SetupButton(Button button, IEventDispatcher dispatcher, UiEvents unitActionType)
+        private void SetupButton(Button button, IEventDispatcher dispatcher, InputEvents unitActionType)
         {
             button.gameObject.SetActive(true);
             button.onClick.AddListener(() => dispatcher.Dispatch(unitActionType));
@@ -57,10 +57,10 @@ namespace _Scripts
             button.gameObject.SetActive(false);
         }
 
-        public void SetAllActionButtonsNotInteractable()
+        public void SetAllActionButtonsInteractable(bool areInteractible)
         {
-            MoveActionButton.Button.interactable = false;
-            AttackActionButton.Button.interactable = false;
+            MoveActionButton.Button.interactable = areInteractible;
+            AttackActionButton.Button.interactable = areInteractible;
         }
 
         public void SetActionButtonInteractable(UnitActionTypes action, bool isInteractable)
@@ -95,6 +95,21 @@ namespace _Scripts
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(action), action, null);
+            }
+        }
+
+        public void SetActionInProgressUi(bool isActionInProgress)
+        {
+            if (isActionInProgress)
+            {
+                UnhighlightActions();
+                SetAllActionButtonsInteractable(false);
+                view.EndTurnButton.interactable = false;
+            }
+            else
+            {
+                SetAllActionButtonsInteractable(true);
+                view.EndTurnButton.interactable = true;
             }
         }
 

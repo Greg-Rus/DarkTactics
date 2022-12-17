@@ -22,7 +22,7 @@ namespace _Scripts.Commands
             injectionBinder.injector.Inject(unitContext);
             unitContext.Start();
             
-            unitContext.dispatcher.Dispatch(GameEvents.SetupUnit, new SetupUnitPayload()
+            unitContext.dispatcher.Dispatch(UnitEvents.SetupUnit, new SetupUnitPayload()
             {
                 GridPosition = Payload.InitialPosition,
                 Settings = Payload.Settings

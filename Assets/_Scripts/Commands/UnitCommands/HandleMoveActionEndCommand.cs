@@ -12,8 +12,8 @@ namespace _Scripts.Commands.UnitCommands
         public override void Execute()
         {
             UnitModel.SelectedAction = UnitActionTypes.None;
-            UnitModel.WalkableCells = new GridCellModel[0,0];
-            GridVisualsService.ClearWalkableGrid();
+            UnitModel.ActionRangeCells = new GridCellModel[0,0];
+            GridVisualsService.ClearGrid();
             UiController.MoveActionButton.Highlight.gameObject.SetActive(false);
         }
     }

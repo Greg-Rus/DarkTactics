@@ -19,4 +19,3 @@ namespace _Scripts
         }
     }
 }
-

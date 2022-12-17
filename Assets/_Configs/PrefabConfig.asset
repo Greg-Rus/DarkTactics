@@ -19,3 +19,5 @@ MonoBehaviour:
   - UnitTypes: 02000000
     UnitPrefab: {fileID: 7084521827219833061, guid: e0873d41fdd85b14783c9ec2ef7c5230,
       type: 3}
+  Projectile: {fileID: 7276137446248435649, guid: d71c5ec18941bd54cbbf9ff9144c3acb,
+    type: 3}

@@ -102,5 +102,20 @@ namespace _Scripts
 
             return cells;
         }
+
+        public Vector2 GetUnitCoordinatesByUnitId(int unitId)
+        {
+            var coordinates = Vector2.one * -1;
+            foreach (var cell in _gridCellModelMap)
+            {
+                if(cell.Entities.Contains(unitId))
+                {
+                    coordinates = cell.Coordinates;
+                    break;
+                }
+            }
+
+            return coordinates;
+        }
     }
 }

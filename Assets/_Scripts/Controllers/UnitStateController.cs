@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using _Scripts.Commands.UnitCommands;
+using _Scripts.Helpers;
 using _Scripts.Models;
+using strange.extensions.injector.api;
 
 namespace _Scripts.Controllers
 {
@@ -8,6 +11,8 @@ namespace _Scripts.Controllers
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public ActionSettingsConfig ActionSettingsConfig { private get; set; }
+        
+        [Inject] public IInjectionBinder InjectionBinder{ get; set; }
 
         public bool CanPerformAction(UnitActionTypes action)
         {
@@ -21,11 +26,20 @@ namespace _Scripts.Controllers
             if (CanPerformAction(action))
             {
                 UnitModel.State.ActionPoints -= ActionSettingsConfig.GetActionCost(action);
+                CheckForEndOfTurn();
                 return true;
             }
             else
             {
                 return false;
+            }
+        }
+
+        private void CheckForEndOfTurn()
+        {
+            if (UnitModel.State.ActionPoints <= 0)
+            {
+                new CompleteUnitTurnCommand().InjectWith(InjectionBinder).Execute();
             }
         }
 

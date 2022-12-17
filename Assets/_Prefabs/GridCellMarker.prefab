@@ -54,6 +54,10 @@ MonoBehaviour:
   BorderSouth: {fileID: 6217701431639545506}
   BorderEast: {fileID: 7413287051161158689}
   BorderWest: {fileID: 5586830002174519245}
+  WalkFill: {r: 0.08627451, g: 1, b: 0, a: 0.5019608}
+  WalkBorder: {r: 0.07058824, g: 0.07450981, b: 1, a: 1}
+  AttackFill: {r: 1, g: 0, b: 0, a: 0.5019608}
+  AttackcBorder: {r: 1, g: 0.49019608, b: 0, a: 1}
 --- !u!1 &1427332542360096474
 GameObject:
   m_ObjectHideFlags: 0

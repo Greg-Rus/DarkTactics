@@ -27,7 +27,7 @@ namespace _Scripts.Commands
             {
                 Id = EntityRegistryService.NextEntityId,
                 InitialPosition = new Vector2Int(4, 0),
-                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestNoAttackUnit)
+                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestLongRangeUnit)
             });
             
             dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()

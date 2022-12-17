@@ -1,20 +1,18 @@
 ﻿using _Scripts.Commands.UnitCommands;
 using _Scripts.EventPayloads;
 using _Scripts.Helpers;
-using _Scripts.Models;
 using strange.extensions.command.impl;
 
 namespace _Scripts.Commands
 {
-    public class ToggleUnitSelectionCommand : EventCommand
+    public class ToggleUnitSelectionCommand : EventCommand<UnitSelectedPayload>
     {
         [Inject(UnitContextKeys.Id)]  public int UnitId {get;set;}
         [Inject] public UnitContextRoot RootView{get;set;}
         [Inject] public GridVisualsService GridVisualsService { private get; set; }
         public override void Execute()
         {
-            var selectionResult = (UnitSelectedPayload)evt.data;
-            var isThisUnitActive = UnitId == selectionResult.SelectedUnitId;
+            var isThisUnitActive = UnitId == Payload.SelectedUnitId;
             RootView.SelectionMarker.SetActive(isThisUnitActive);
             if (isThisUnitActive)
             {
@@ -23,7 +21,7 @@ namespace _Scripts.Commands
             }
             else
             {
-                GridVisualsService.ClearWalkableGrid();
+                GridVisualsService.ClearGrid();
             }
         }
     }

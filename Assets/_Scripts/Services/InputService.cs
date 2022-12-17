@@ -39,7 +39,7 @@ namespace _Scripts
                 
                 if (Physics.Raycast(ray, out RaycastHit hitEnemy, float.PositiveInfinity, ContextMediator.EnemyLayerMask))
                 {
-                    Dispatcher.Dispatch(GameEvents.MouseClickEnemy,  new AttackActionPayload() { Target = hitEnemy.collider.transform});
+                    Dispatcher.Dispatch(GameEvents.MouseClickEnemy,  new AttackActionPayload() { TargetTransform = hitEnemy.collider.transform});
                 }
             }
             

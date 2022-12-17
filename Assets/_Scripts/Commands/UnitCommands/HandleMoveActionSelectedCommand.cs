@@ -13,15 +13,13 @@ namespace _Scripts.Commands.UnitCommands
         [Inject] public UnitStateController UnitStateController { private get; set; }
         public override void Execute()
         {
-            if (UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Move))
+            if (UnitStateController.CanPerformAction(UnitActionTypes.Move))
             {
                 UnitModel.SelectedAction = UnitActionTypes.Move;
                 new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
-                GridVisualsService.DrawWalkableGrid(UnitModel.WalkableCells);
-                UiController.MoveActionButton.Highlight.gameObject.SetActive(true);
+                GridVisualsService.DrawWalkableGrid(UnitModel.ActionRangeCells);
                 UiController.HighlightSelectedAction(UnitActionTypes.Move);
             }
-            
         }
     }
 }

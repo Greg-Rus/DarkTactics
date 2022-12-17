@@ -1,4 +1,5 @@
 ﻿using _Scripts.EventPayloads;
+using _Scripts.Models;
 using strange.extensions.command.impl;
 using strange.extensions.context.api;
 using strange.extensions.dispatcher.eventdispatcher.api;
@@ -8,14 +9,42 @@ namespace _Scripts.Commands
     public class ProcessUnitClickCommand : EventCommand
     {
         [Inject] public EntityRegistryService EntityRegistryService { get; set; }
-        [Inject(ContextKeys.CROSS_CONTEXT_DISPATCHER)] public IEventDispatcher crossContextDispatcher { get; set; }
-        
+        [Inject] public GameSessionModel GameSessionModel { private get; set; }
+
+        [Inject] public UiController UiController { private get; set; }
 
         public override void Execute()
         {
             var payload = (MouseClickUnitPayload)evt.data;
             var selectedUnitId = EntityRegistryService.GetEntityIdByTransform(payload.UnitTransform);
-            crossContextDispatcher.Dispatch(GameEvents.SelectUnit, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
+
+            TryDeselectOldUnit(selectedUnitId);
+
+            UiController.ToggleUnitStats(true);
+            UiController.ToggleActionsBar(true);
+            UiController.UnhighlightActions();
+            
+            SelectNewUnit(selectedUnitId);
+        }
+
+        private void SelectNewUnit(int selectedUnitId)
+        {
+            GameSessionModel.SelectedUnitId = selectedUnitId;
+            
+            EntityRegistryService.GetEntityContextById(selectedUnitId)
+                .dispatcher
+                .Dispatch(UnitEvents.UnitSelected, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
+        }
+
+        private void TryDeselectOldUnit(int selectedUnitId)
+        {
+            if (GameSessionModel.SelectedUnitId.HasValue)
+            {
+                var oldUnit = GameSessionModel.SelectedUnitId.Value;
+                EntityRegistryService.GetEntityContextById(oldUnit)
+                    .dispatcher
+                    .Dispatch(UnitEvents.UnitSelected, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
+            }
         }
     }
 }

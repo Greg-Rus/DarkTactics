@@ -27,6 +27,8 @@ namespace _Scripts
         public EntityTypes EntityType;
         public UnitTypes UnitType;
         public int MovementRange;
+        public int AttackRange;
+        public DamageEffectConfig AttackDamageEffect;
         public UnitActionTypes[] Actions;
         public int BaseHitPoints;
         public int BaseActionPoints;

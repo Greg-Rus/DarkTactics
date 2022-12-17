@@ -10,63 +10,94 @@ namespace _Scripts.Commands.UnitCommands
 {
     public class PerformAttackActionCommand : EventCommand<AttackActionPayload>
     {
-        [Inject]  public UnitContextRoot RootView {get;set;}
+        [Inject] public UnitContextRoot RootView { get; set; }
 
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public Animator Animator { private get; set; }
         [Inject] public UnitStateController UnitStateController { private get; set; }
+        [Inject] public ProjectileFactory ProjectileFactory { private get; set; }
 
         private bool shootEventReceived = false;
         private bool attackEndEventReceived = false;
         private bool isAttacking = false;
-        
+
 
         public override void Execute()
         {
-            if(UnitModel.SelectedAction != UnitActionTypes.Attack || 
-               isAttacking ||
-               UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Attack) == false) return;
-            
+            if (UnitModel.SelectedAction != UnitActionTypes.Attack ||
+                isAttacking ||
+                UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Attack) == false ||
+                IsCellInRange(Payload.TargetCoordinates) == false)
+            {
+                return;
+            }
+
             new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
-            RootView.StartCoroutine(DoAttack());
+            new PrepareForUnitActionCommand().InjectWith(injectionBinder).Execute();
+
+            RootView.StartCoroutine(DoAttack(Payload.TargetTransform));
         }
 
-        private IEnumerator DoAttack()
+        private IEnumerator DoAttack(Transform target)
         {
             isAttacking = true;
-            yield return new RotateToWorldPositionCommandAsync(Payload.Target.position).InjectWith(injectionBinder).Execute();
+
+            yield return new RotateToWorldPositionCommandAsync(Payload.TargetTransform.position)
+                .InjectWith(injectionBinder).Execute();
             yield return AnimateAttackAndWait();
-            yield return SpawnAttackAndWait();
+            yield return SpawnAttackAndWait(target);
             UnitModel.SelectedAction = UnitActionTypes.None;
             isAttacking = false;
             new HandleAttackCompleteCommand().InjectWith(injectionBinder).Execute();
         }
 
-
         private IEnumerator AnimateAttackAndWait()
         {
-            RootView.Animator.SetTrigger(AnimatorParameters.CastSpell);
-            dispatcher.AddListener(UnitEvents.SpellCastShoot, OnShootEvent);
+            RootView.Animator.SetTrigger(AnimationConstants.Attack);
+            dispatcher.AddListener(AnimationEvents.AttackEmit, OnShootEvent);
             yield return new WaitUntil(() => shootEventReceived);
         }
-        
+
         private void OnShootEvent()
         {
-            dispatcher.RemoveListener(UnitEvents.SpellCastShoot, OnShootEvent);
+            dispatcher.RemoveListener(AnimationEvents.AttackEmit, OnShootEvent);
             shootEventReceived = true;
         }
-        
-        private IEnumerable SpawnAttackAndWait()
+
+        private IEnumerator SpawnAttackAndWait(Transform target)
         {
-            Debug.Log("Would emit spell");
-            dispatcher.AddListener(UnitEvents.SpellCastFinished, OnAttackFinishedEvent);
+            var projectile = ProjectileFactory.SpawnProjectile();
+            projectile.Init(UnitModel.Settings.AttackDamageEffect);
+            projectile.transform.position = RootView.RightHandSpawnPoint.position;
+            var targetPosition = target.position + Vector3.up * RootView.RightHandSpawnPoint.position.y;
+            projectile.transform.LookAt(targetPosition);
+            projectile.Rigidbody.AddForce(projectile.transform.forward * 400f);
+
+            dispatcher.AddListener(AnimationEvents.AttackFinished, OnAttackFinishedEvent);
             yield return new WaitUntil(() => attackEndEventReceived);
+            new CleanUpAfterUnitActionCommand().InjectWith(injectionBinder).Execute();
         }
-        
+
         private void OnAttackFinishedEvent()
         {
-            dispatcher.RemoveListener(UnitEvents.SpellCastFinished, OnAttackFinishedEvent);
+            dispatcher.RemoveListener(AnimationEvents.AttackFinished, OnAttackFinishedEvent);
             attackEndEventReceived = true;
+        }
+
+        private bool IsCellInRange(Vector2 coordinates)
+        {
+            var isInRange = false;
+            foreach (var cellModel in UnitModel.ActionRangeCells)
+            {
+                if (cellModel == null) continue;
+                if (cellModel.Coordinates == coordinates)
+                {
+                    isInRange = true;
+                    break;
+                }
+            }
+
+            return isInRange;
         }
     }
 }

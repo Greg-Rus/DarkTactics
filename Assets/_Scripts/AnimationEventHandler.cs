@@ -1,11 +1,12 @@
-﻿using strange.extensions.dispatcher.eventdispatcher.api;
+﻿using strange.extensions.context.api;
+using strange.extensions.dispatcher.eventdispatcher.api;
 using UnityEngine;
 
 namespace _Scripts
 {
     public class AnimationEventHandler : MonoBehaviour
     {
-        [Inject] public IEventDispatcher Dispatcher { private get; set; }
+        [Inject(ContextKeys.CONTEXT_DISPATCHER)] public IEventDispatcher Dispatcher { private get; set; }
         
         public void FootR()
         {
@@ -15,14 +16,14 @@ namespace _Scripts
         {
         }
 
-        public void Shoot()
+        public void AttackEmit()
         {
-            Dispatcher.Dispatch(UnitEvents.SpellCastShoot);
+            Dispatcher.Dispatch(AnimationEvents.AttackEmit);
         }
 
-        public void SpellCastFinished()
+        public void AttackFinished()
         {
-            Dispatcher.Dispatch(UnitEvents.SpellCastFinished);
+            Dispatcher.Dispatch(AnimationEvents.AttackFinished);
         }
     }
 }

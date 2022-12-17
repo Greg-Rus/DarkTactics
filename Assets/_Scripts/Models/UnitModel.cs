@@ -4,7 +4,7 @@ namespace _Scripts.Models
     {
         public int Id;
         public GridCellModel OccupiedCellModel;
-        public GridCellModel[,] WalkableCells;
+        public GridCellModel[,] ActionRangeCells;
         public UnitActionTypes SelectedAction = UnitActionTypes.None;
         public UnitSettings Settings;
         public UnitModelState State;

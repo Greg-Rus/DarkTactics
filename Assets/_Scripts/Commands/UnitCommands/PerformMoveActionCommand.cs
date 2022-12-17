@@ -1,5 +1,6 @@
 using System.Collections;
 using _Scripts.Commands.UnitCommands;
+using _Scripts.Controllers;
 using _Scripts.Helpers;
 using _Scripts.Models;
 using strange.extensions.command.impl;
@@ -14,13 +15,15 @@ namespace _Scripts.Commands
         [Inject] public GridVisualsService GridVisualsService {get;set;}
         [Inject] public UnitModel Model {get;set;}
         [Inject] public UiController UiController { private get; set; }
+        [Inject] public UnitStateController UnitStateController { private get; set; }
 
         private const float K_RunningSpeed = 5f;
         private const float K_TurningSpeed = 5f;
 
         public override void Execute()
         {
-            if (Model.SelectedAction != UnitActionTypes.Move) return;
+            if (Model.SelectedAction != UnitActionTypes.Move ||
+                UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Move) == false) return;
             
             Debug.Log("Starting coroutine");
             RootView.StopAllCoroutines();
@@ -42,7 +45,7 @@ namespace _Scripts.Commands
         private bool IsCellInRange(GridCellModel cell)
         {
             var isWalkable = false;
-            foreach (var cellModel in Model.WalkableCells)
+            foreach (var cellModel in Model.ActionRangeCells)
             {
                 if(cellModel == null) continue;
                 if (cellModel.Coordinates == cell.Coordinates)
@@ -60,7 +63,7 @@ namespace _Scripts.Commands
             OnDeparture();
             
             bool moving = true;
-            RootView.Animator.SetBool(AnimatorParameters.IsRunning, true);
+            RootView.Animator.SetBool(AnimationConstants.IsRunning, true);
             while (moving)
             {
                 var directionToDestination = destination - RootView.transform.position;
@@ -102,19 +105,16 @@ namespace _Scripts.Commands
         private void OnDeparture()
         {
             Model.OccupiedCellModel.Entities.Remove(Model.Id);
-            GridVisualsService.ClearWalkableGrid();
-            Model.SelectedAction = UnitActionTypes.None;
-            UiController.MoveActionButton.Highlight.gameObject.SetActive(false);
-            UiController.SetAllActionButtonsNotInteractable();
+            new PrepareForUnitActionCommand().InjectWith(injectionBinder).Execute();
         }
 
         private void OnArrival(Vector3 destination)
         {
-            RootView.Animator.SetBool(AnimatorParameters.IsRunning, false);
+            RootView.Animator.SetBool(AnimationConstants.IsRunning, false);
             Model.OccupiedCellModel = GridService.WorldPositionToGridCellModel(destination);
             Model.OccupiedCellModel.Entities.Add(Model.Id);
             new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
-            UiController.UnhighlightActions();
+            new CleanUpAfterUnitActionCommand().InjectWith(injectionBinder).Execute();
         }
     }
 }

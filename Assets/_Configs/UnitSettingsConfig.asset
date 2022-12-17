@@ -17,15 +17,21 @@ MonoBehaviour:
     EntityType: 0
     UnitType: 0
     MovementRange: 5
+    AttackRange: 4
+    AttackDamageEffect: {fileID: 11400000, guid: 7ddb5430e913a6c40befb05361b13907,
+      type: 2}
     Actions: 0100000002000000
     BaseHitPoints: 12
     BaseActionPoints: 2
     BaseSpellPoints: 5
-  - Name: TestNoAttackUnit
+  - Name: TestLongRangeUnit
     EntityType: 0
     UnitType: 1
     MovementRange: 3
-    Actions: 01000000
+    AttackRange: 7
+    AttackDamageEffect: {fileID: 11400000, guid: 9a6a51fdbbf259240a8b6fcdb0795b94,
+      type: 2}
+    Actions: 0100000002000000
     BaseHitPoints: 5
     BaseActionPoints: 2
     BaseSpellPoints: 9
@@ -33,6 +39,9 @@ MonoBehaviour:
     EntityType: 1
     UnitType: 2
     MovementRange: 3
+    AttackRange: 0
+    AttackDamageEffect: {fileID: 11400000, guid: 9a6a51fdbbf259240a8b6fcdb0795b94,
+      type: 2}
     Actions: 01000000
     BaseHitPoints: 5
     BaseActionPoints: 2

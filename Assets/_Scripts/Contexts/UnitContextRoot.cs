@@ -9,5 +9,6 @@ namespace _Scripts
         public Animator Animator;
         public GameObject SelectionMarker;
         public AnimationEventHandler AnimationEventHandler;
+        public Transform RightHandSpawnPoint;
     }
 }

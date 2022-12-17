@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using _Scripts.Models;
+using _Scripts.Views;
 using UnityEngine;
 
 namespace _Scripts
@@ -9,6 +10,7 @@ namespace _Scripts
     public class PrefabConfig : ScriptableObject
     {
         public UnitPrefabMapping[] UnitPrefabMap;
+        public ProjectileView Projectile;
 
         public UnitContextRoot GetPrefabForUnitType(UnitTypes type)
         {

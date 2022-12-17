@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _Scripts.Models;
 using _Scripts.Views;
 using UnityEditor.UIElements;
@@ -33,7 +34,17 @@ namespace _Scripts
 
         public void DrawWalkableGrid(GridCellModel[,] walkableCellModels)
         {
-            ClearWalkableGrid();
+            DrawGrid(walkableCellModels, GridStyle.Walkable);
+        }
+
+        public void DrawAttacableGrid(GridCellModel[,] walkableCellModels)
+        {
+            DrawGrid(walkableCellModels, GridStyle.Attackable);
+        }
+
+        private void DrawGrid(GridCellModel[,] walkableCellModels, GridStyle style)
+        {
+            ClearGrid();
             
             if (walkableCellModels.Length > freeViews.Count)
             {
@@ -48,12 +59,12 @@ namespace _Scripts
                     if (model == null) continue;
                     
                     var coordinate = new Vector2Int(x, y);   
-                    SetupView(coordinate, walkableCellModels);
+                    SetupView(coordinate, walkableCellModels, style);
                 }
             }
         }
 
-        public void ClearWalkableGrid()
+        public void ClearGrid()
         {
             foreach (var view in occupiedViews)
             {
@@ -78,7 +89,7 @@ namespace _Scripts
             }
         }
 
-        private void SetupView(Vector2Int coordinate, GridCellModel[,] map)
+        private void SetupView(Vector2Int coordinate, GridCellModel[,] map, GridStyle style)
         {
             var view = freeViews.Dequeue();
             occupiedViews.Add(view);
@@ -88,16 +99,27 @@ namespace _Scripts
                 var neighborCoordinate = coordinate + offset;
                 if (HasBorderAtLocalCoordinate(neighborCoordinate, map))
                 {
-                    if (offset == Vector2Int.up) view.BorderNorth.enabled = true;
-                    if (offset == Vector2Int.down) view.BorderSouth.enabled = true;
-                    if (offset == Vector2Int.right) view.BorderEast.enabled = true;
-                    if (offset == Vector2Int.left) view.BorderWest.enabled = true;
+                    if (offset == Vector2Int.up)    view.BorderNorth.enabled = true;
+                    if (offset == Vector2Int.down)  view.BorderSouth.enabled = true;
+                    if (offset == Vector2Int.right) view.BorderEast.enabled  = true;
+                    if (offset == Vector2Int.left)  view.BorderWest.enabled  = true;
                 }
             }
 
-            view.transform.position =
-                GridService.GridCoordinateToWorldPosition(map[coordinate.x, coordinate.y].Coordinates);
+            view.transform.position = GridService.GridCoordinateToWorldPosition(map[coordinate.x, coordinate.y].Coordinates);
             view.gameObject.SetActive(true);
+            switch (style)
+            {
+                case GridStyle.Walkable:
+                    view.SetWalkScheme();
+                    break;
+                case GridStyle.Attackable:
+                    view.SetAttackScheme();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
+            }
+            
         }
 
         private bool HasBorderAtLocalCoordinate(Vector2Int localOffset, GridCellModel[,] cells)
@@ -114,7 +136,5 @@ namespace _Scripts
 
             return hasBorder;
         }
-        
-        
     }
 }

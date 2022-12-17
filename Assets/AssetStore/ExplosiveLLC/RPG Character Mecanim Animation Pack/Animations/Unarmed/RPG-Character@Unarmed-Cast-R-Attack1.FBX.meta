@@ -418,7 +418,7 @@ ModelImporter:
       curves: []
       events:
       - time: 1
-        functionName: Shoot
+        functionName: AttackEmit
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -483,7 +483,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.99601996
-        functionName: SpellCastFinished
+        functionName: AttackFinished
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

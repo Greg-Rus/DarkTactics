@@ -10,7 +10,7 @@ namespace _Scripts.Commands
 
         public override void Execute()
         {
-            UnitModel.WalkableCells = GridService.GetCellsInRange(UnitModel.Settings.MovementRange, UnitModel.OccupiedCellModel.Coordinates, IsCellWalkable);
+            UnitModel.ActionRangeCells = GridService.GetCellsInRange(UnitModel.Settings.MovementRange, UnitModel.OccupiedCellModel.Coordinates, IsCellWalkable);
         }
 
         private bool IsCellWalkable(GridCellModel cell)

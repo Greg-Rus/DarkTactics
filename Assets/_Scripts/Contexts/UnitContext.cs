@@ -32,17 +32,18 @@ namespace _Scripts
             injectionBinder.Bind<Animator>().ToSingleton().ToValue(_view.Animator);
             injectionBinder.Bind<UnitModel>().ToSingleton().ToValue(model);
             injectionBinder.Bind<UnitStateController>().ToSingleton().ToValue(stateController);
-            injectionBinder.injector.Inject(_view.AnimationEventHandler);
-
-            commandBinder.Bind(GameEvents.SetupUnit).To<SetupUnitCommand>().Once();
-            commandBinder.Bind(GameEvents.GridCellSelected).To<PerformMoveActionCommand>();
-            commandBinder.Bind(GameEvents.SelectUnit).To<ToggleUnitSelectionCommand>();
+            injectionBinder.Bind<AnimationEventHandler>().ToSingleton().ToValue(_view.AnimationEventHandler);
             
+            commandBinder.Bind(UnitEvents.SetupUnit).To<SetupUnitCommand>().Once();
+            commandBinder.Bind(UnitEvents.GridCellSelected).To<PerformMoveActionCommand>();
+            commandBinder.Bind(UnitEvents.UnitSelected).To<ToggleUnitSelectionCommand>();
             commandBinder.Bind(UnitEvents.EnemySelected).To<PerformAttackActionCommand>();
             commandBinder.Bind(UnitEvents.TurnStarted).To<HandleTurnStartCommand>();
+            commandBinder.Bind(UnitEvents.HitTaken).To<PerformReceiveHitCommand>();
             
-            commandBinder.Bind(UiEvents.MoveActionSelected).To<HandleMoveActionSelectedCommand>();
-            commandBinder.Bind(UiEvents.AttackActionSelected).To<HandleAttackSelectionCommand>();
+            
+            commandBinder.Bind(InputEvents.MoveActionSelected).To<HandleMoveActionSelectedCommand>();
+            commandBinder.Bind(InputEvents.AttackActionSelected).To<HandleAttackSelectionCommand>();
         }
     }
 }

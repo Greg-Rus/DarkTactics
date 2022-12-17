@@ -10,11 +10,14 @@ namespace _Scripts.Commands.UnitCommands
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public UiController UiController { private get; set; }
+        [Inject] public GridVisualsService GridVisualsService { private get; set; }
         public override void Execute()
         {
             UnitModel.SelectedAction = UnitActionTypes.Attack;
             UiController.HighlightSelectedAction(UnitActionTypes.Attack);
             new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
+            new UpdateAttackRangeCellsCommand().InjectWith(injectionBinder).Execute();
+            GridVisualsService.DrawAttacableGrid(UnitModel.ActionRangeCells);
         }
     }
 }
