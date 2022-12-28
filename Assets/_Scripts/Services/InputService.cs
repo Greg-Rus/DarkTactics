@@ -30,16 +30,17 @@ namespace _Scripts
                     Dispatcher.Dispatch(GameEvents.MouseClickUnit,  new MouseClickUnitPayload { UnitTransform = hitUnit.transform});
                     return;
                 }
+                
+                if (Physics.Raycast(ray, out RaycastHit hitEnemy, float.PositiveInfinity, ContextMediator.EnemyLayerMask))
+                {
+                    Dispatcher.Dispatch(GameEvents.MouseClickEnemy,  new AttackActionPayload() { TargetTransform = hitEnemy.collider.transform});
+                    return;
+                }
 
                 if (Physics.Raycast(ray, out RaycastHit hitGround, float.PositiveInfinity, ContextMediator.GroundLayerMask))
                 {
                     ContextMediator.DebugMousePointer.transform.position = hitGround.point;
                     Dispatcher.Dispatch(GameEvents.MouseClickGround,  new MouseClickGroundPayload { ClickPosition = hitGround.point});
-                }
-                
-                if (Physics.Raycast(ray, out RaycastHit hitEnemy, float.PositiveInfinity, ContextMediator.EnemyLayerMask))
-                {
-                    Dispatcher.Dispatch(GameEvents.MouseClickEnemy,  new AttackActionPayload() { TargetTransform = hitEnemy.collider.transform});
                 }
             }
             

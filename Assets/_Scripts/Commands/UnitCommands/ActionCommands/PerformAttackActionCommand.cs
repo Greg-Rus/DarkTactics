@@ -20,10 +20,11 @@ namespace _Scripts.Commands.UnitCommands
         private bool shootEventReceived = false;
         private bool attackEndEventReceived = false;
         private bool isAttacking = false;
-
-
+        
         public override void Execute()
         {
+            Debug.Log("Perform Attack");
+            Retain();
             if (UnitModel.SelectedAction != UnitActionTypes.Attack ||
                 isAttacking ||
                 UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Attack) == false ||
@@ -31,10 +32,6 @@ namespace _Scripts.Commands.UnitCommands
             {
                 return;
             }
-
-            new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
-            new PrepareForUnitActionCommand().InjectWith(injectionBinder).Execute();
-
             RootView.StartCoroutine(DoAttack(Payload.TargetTransform));
         }
 
@@ -46,9 +43,8 @@ namespace _Scripts.Commands.UnitCommands
                 .InjectWith(injectionBinder).Execute();
             yield return AnimateAttackAndWait();
             yield return SpawnAttackAndWait(target);
-            UnitModel.SelectedAction = UnitActionTypes.None;
+            
             isAttacking = false;
-            new HandleAttackCompleteCommand().InjectWith(injectionBinder).Execute();
         }
 
         private IEnumerator AnimateAttackAndWait()
@@ -75,13 +71,13 @@ namespace _Scripts.Commands.UnitCommands
 
             dispatcher.AddListener(AnimationEvents.AttackFinished, OnAttackFinishedEvent);
             yield return new WaitUntil(() => attackEndEventReceived);
-            new CleanUpAfterUnitActionCommand().InjectWith(injectionBinder).Execute();
         }
 
         private void OnAttackFinishedEvent()
         {
             dispatcher.RemoveListener(AnimationEvents.AttackFinished, OnAttackFinishedEvent);
             attackEndEventReceived = true;
+            Release();
         }
 
         private bool IsCellInRange(Vector2 coordinates)

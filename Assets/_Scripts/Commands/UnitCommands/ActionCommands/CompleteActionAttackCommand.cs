@@ -1,10 +1,10 @@
 ﻿using _Scripts.Helpers;
 using _Scripts.Models;
-using strange.extensions.command.impl;
+using strange.extensions.injector.api;
 
 namespace _Scripts.Commands.UnitCommands
 {
-    public class HandleAttackCompleteCommand : Command
+    public class CompleteActionAttackCommand : CompleteActionCommand
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public UiController UiController { private get; set; }
@@ -13,6 +13,7 @@ namespace _Scripts.Commands.UnitCommands
             UnitModel.SelectedAction = UnitActionTypes.None;
             UiController.HighlightSelectedAction(UnitActionTypes.None);
             new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
+            base.Execute();
         }
     }
 }

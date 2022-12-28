@@ -35,15 +35,23 @@ namespace _Scripts
             injectionBinder.Bind<AnimationEventHandler>().ToSingleton().ToValue(_view.AnimationEventHandler);
             
             commandBinder.Bind(UnitEvents.SetupUnit).To<SetupUnitCommand>().Once();
-            commandBinder.Bind(UnitEvents.GridCellSelected).To<PerformMoveActionCommand>();
             commandBinder.Bind(UnitEvents.UnitSelected).To<ToggleUnitSelectionCommand>();
-            commandBinder.Bind(UnitEvents.EnemySelected).To<PerformAttackActionCommand>();
             commandBinder.Bind(UnitEvents.TurnStarted).To<HandleTurnStartCommand>();
             commandBinder.Bind(UnitEvents.HitTaken).To<PerformReceiveHitCommand>();
-            
-            
+            //Action Selection
             commandBinder.Bind(InputEvents.MoveActionSelected).To<HandleMoveActionSelectedCommand>();
             commandBinder.Bind(InputEvents.AttackActionSelected).To<HandleAttackSelectionCommand>();
+            //Action Execution
+            commandBinder.Bind(UnitEvents.GridCellSelected)
+                .To<BeginActionCommand>()
+                .To<PerformMoveActionCommand>()
+                .To<CompleteActionCommand>()
+                .InSequence();
+            commandBinder.Bind(UnitEvents.EnemySelected)
+                .To<BeginActionCommand>()
+                .To<PerformAttackActionCommand>()
+                .To<CompleteActionCommand>()
+                .InSequence();
         }
     }
 }

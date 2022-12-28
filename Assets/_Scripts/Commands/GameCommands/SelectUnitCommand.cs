@@ -16,7 +16,7 @@ namespace _Scripts.Commands
 
             UiController.ToggleUnitStats(true);
             UiController.ToggleActionsBar(true);
-            UiController.UnhighlightActions();
+            UiController.ResetActionButtons();
         }
     }
 }

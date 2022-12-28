@@ -24,7 +24,7 @@ namespace _Scripts
         public void Initialize()
         {
             view.EndTurnButton.onClick.AddListener(() => CrossContextDispatcher.Dispatch(GameEvents.EndPlayerTurn));
-            UnhighlightActions();
+            ResetActionButtons();
             RemoveAllListeners();
             ToggleUnitStats(false);
         }
@@ -85,7 +85,7 @@ namespace _Scripts
             switch (action)
             {
                 case UnitActionTypes.None:
-                    UnhighlightActions();
+                    ResetActionButtons();
                     break;
                 case UnitActionTypes.Move:
                     EnableHighlightOnButton(MoveActionButton);
@@ -102,7 +102,7 @@ namespace _Scripts
         {
             if (isActionInProgress)
             {
-                UnhighlightActions();
+                ResetActionButtons();
                 SetAllActionButtonsInteractable(false);
                 view.EndTurnButton.interactable = false;
             }
@@ -115,11 +115,11 @@ namespace _Scripts
 
         private void EnableHighlightOnButton(ActionButtonView buttonView)
         {
-            UnhighlightActions();
+            ResetActionButtons();
             buttonView.Highlight.gameObject.SetActive(true);
         }
 
-        public void UnhighlightActions()
+        public void ResetActionButtons()
         {
             MoveActionButton.Highlight.gameObject.SetActive(false);
             AttackActionButton.Highlight.gameObject.SetActive(false);

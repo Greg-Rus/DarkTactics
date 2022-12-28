@@ -12,9 +12,7 @@ namespace _Scripts.Commands
     {
         [Inject]  public UnitContextRoot RootView {get;set;}
         [Inject] public GridService GridService {get;set;}
-        [Inject] public GridVisualsService GridVisualsService {get;set;}
         [Inject] public UnitModel Model {get;set;}
-        [Inject] public UiController UiController { private get; set; }
         [Inject] public UnitStateController UnitStateController { private get; set; }
 
         private const float K_RunningSpeed = 5f;
@@ -22,6 +20,8 @@ namespace _Scripts.Commands
 
         public override void Execute()
         {
+            Debug.Log("Perform Move");
+            Retain();
             if (Model.SelectedAction != UnitActionTypes.Move ||
                 UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Move) == false) return;
             
@@ -105,7 +105,6 @@ namespace _Scripts.Commands
         private void OnDeparture()
         {
             Model.OccupiedCellModel.Entities.Remove(Model.Id);
-            new PrepareForUnitActionCommand().InjectWith(injectionBinder).Execute();
         }
 
         private void OnArrival(Vector3 destination)
@@ -113,8 +112,7 @@ namespace _Scripts.Commands
             RootView.Animator.SetBool(AnimationConstants.IsRunning, false);
             Model.OccupiedCellModel = GridService.WorldPositionToGridCellModel(destination);
             Model.OccupiedCellModel.Entities.Add(Model.Id);
-            new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
-            new CleanUpAfterUnitActionCommand().InjectWith(injectionBinder).Execute();
+            Release();
         }
     }
 }

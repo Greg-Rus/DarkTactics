@@ -1,9 +1,10 @@
-﻿using _Scripts.Models;
+﻿using _Scripts.Helpers;
+using _Scripts.Models;
 using strange.extensions.command.impl;
 
 namespace _Scripts.Commands.UnitCommands
 {
-    public class HandleMoveActionEndCommand : EventCommand
+    public class CompleteMoveActionCommand : Command
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public GridVisualsService GridVisualsService { private get; set; }
