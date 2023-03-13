@@ -8,7 +8,6 @@ namespace _Scripts.Commands
     public class StartEnemyTurnCommand : EventCommand
     {
         [Inject] public GameSessionModel GameSessionModel { private get; set; }
-        [Inject] public UiController UiController { private get; set; }
         [Inject] public CoroutineService CoroutineService { private get; set; }
         public override void Execute()
         {
@@ -18,7 +17,7 @@ namespace _Scripts.Commands
 
         private IEnumerator MockTurn()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
             dispatcher.Dispatch(GameEvents.EndEnemyTurn);
         }
     }

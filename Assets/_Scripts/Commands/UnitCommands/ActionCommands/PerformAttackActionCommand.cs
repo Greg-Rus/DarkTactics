@@ -11,10 +11,7 @@ namespace _Scripts.Commands.UnitCommands
     public class PerformAttackActionCommand : EventCommand<AttackActionPayload>
     {
         [Inject] public UnitContextRoot RootView { get; set; }
-
         [Inject] public UnitModel UnitModel { private get; set; }
-        [Inject] public Animator Animator { private get; set; }
-        [Inject] public UnitStateController UnitStateController { private get; set; }
         [Inject] public ProjectileFactory ProjectileFactory { private get; set; }
 
         private bool shootEventReceived = false;
@@ -25,13 +22,6 @@ namespace _Scripts.Commands.UnitCommands
         {
             Debug.Log("Perform Attack");
             Retain();
-            if (UnitModel.SelectedAction != UnitActionTypes.Attack ||
-                isAttacking ||
-                UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Attack) == false ||
-                IsCellInRange(Payload.TargetCoordinates) == false)
-            {
-                return;
-            }
             RootView.StartCoroutine(DoAttack(Payload.TargetTransform));
         }
 

@@ -14,20 +14,18 @@ namespace _Scripts.Commands
 
         public override void Execute()
         {
-            if (GameSessionModel.SelectedUnitId.HasValue)
-            {
-                var enemyId = EntityRegistryService.GetEntityIdByTransform(Payload.TargetTransform);
-                var enemyCoordinate = GridService.GetUnitCoordinatesByUnitId(enemyId);
+            if (!GameSessionModel.SelectedUnitId.HasValue) return;
+            var enemyId = EntityRegistryService.GetEntityIdByTransform(Payload.TargetTransform);
+            var enemyCoordinate = GridService.GetUnitCoordinatesByUnitId(enemyId);
                 
-                EntityRegistryService.GetEntityContextById(GameSessionModel.SelectedUnitId.Value)
-                    .dispatcher
-                    .Dispatch(UnitEvents.EnemySelected, new AttackActionPayload()
-                    {
-                        TargetTransform = Payload.TargetTransform,
-                        TargetId = enemyId,
-                        TargetCoordinates = enemyCoordinate
-                    });
-            }
+            EntityRegistryService.GetEntityContextById(GameSessionModel.SelectedUnitId.Value)
+                .dispatcher
+                .Dispatch(UnitEvents.EnemySelected, new AttackActionPayload()
+                {
+                    TargetTransform = Payload.TargetTransform,
+                    TargetId = enemyId,
+                    TargetCoordinates = enemyCoordinate
+                });
         }
     }
 }

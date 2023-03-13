@@ -33,6 +33,7 @@ namespace _Scripts
             injectionBinder.Bind<UnitModel>().ToSingleton().ToValue(model);
             injectionBinder.Bind<UnitStateController>().ToSingleton().ToValue(stateController);
             injectionBinder.Bind<AnimationEventHandler>().ToSingleton().ToValue(_view.AnimationEventHandler);
+            injectionBinder.Bind<UnitSensor>().ToSingleton();
             
             commandBinder.Bind(UnitEvents.SetupUnit).To<SetupUnitCommand>().Once();
             commandBinder.Bind(UnitEvents.UnitSelected).To<ToggleUnitSelectionCommand>();
@@ -43,11 +44,15 @@ namespace _Scripts
             commandBinder.Bind(InputEvents.AttackActionSelected).To<HandleAttackSelectionCommand>();
             //Action Execution
             commandBinder.Bind(UnitEvents.GridCellSelected)
+                .To<FilterMoveActionCommand>()
+                .To<ConsumeResourcesForMoveActionCommand>()
                 .To<BeginActionCommand>()
                 .To<PerformMoveActionCommand>()
                 .To<CompleteActionCommand>()
                 .InSequence();
             commandBinder.Bind(UnitEvents.EnemySelected)
+                .To<FilterAttackActionCommand>()
+                .To<ConsumeResourcesForAttackActionCommand>()
                 .To<BeginActionCommand>()
                 .To<PerformAttackActionCommand>()
                 .To<CompleteActionCommand>()

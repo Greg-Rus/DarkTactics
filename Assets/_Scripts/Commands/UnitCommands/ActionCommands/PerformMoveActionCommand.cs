@@ -8,12 +8,11 @@ using UnityEngine;
 
 namespace _Scripts.Commands
 {
-    public class PerformMoveActionCommand : EventCommand
+    public class PerformMoveActionCommand : EventCommand<GridCellModel>
     {
         [Inject]  public UnitContextRoot RootView {get;set;}
         [Inject] public GridService GridService {get;set;}
         [Inject] public UnitModel Model {get;set;}
-        [Inject] public UnitStateController UnitStateController { private get; set; }
 
         private const float K_RunningSpeed = 5f;
         private const float K_TurningSpeed = 5f;
@@ -22,42 +21,12 @@ namespace _Scripts.Commands
         {
             Debug.Log("Perform Move");
             Retain();
-            if (Model.SelectedAction != UnitActionTypes.Move ||
-                UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Move) == false) return;
-            
-            Debug.Log("Starting coroutine");
             RootView.StopAllCoroutines();
-            var destinationGridCellModel = (GridCellModel)evt.data;
-
-            if (IsCellWalkable(destinationGridCellModel) && IsCellInRange(destinationGridCellModel))
-            {
-                var cellWorldPosition = GridService.GridCoordinateToWorldPosition(destinationGridCellModel.Coordinates);
-                RootView.StartCoroutine(MoveToPosition(cellWorldPosition));
-                RootView.StartCoroutine(RotateToPosition(cellWorldPosition));
-            }
+            var cellWorldPosition = GridService.GridCoordinateToWorldPosition(Payload.Coordinates);
+            RootView.StartCoroutine(MoveToPosition(cellWorldPosition));
+            RootView.StartCoroutine(RotateToPosition(cellWorldPosition));
         }
-
-        private bool IsCellWalkable(GridCellModel cell)
-        {
-            return cell.Entities.Count == 0;
-        }
-
-        private bool IsCellInRange(GridCellModel cell)
-        {
-            var isWalkable = false;
-            foreach (var cellModel in Model.ActionRangeCells)
-            {
-                if(cellModel == null) continue;
-                if (cellModel.Coordinates == cell.Coordinates)
-                {
-                    isWalkable = true;
-                    break;
-                }
-            }
-
-            return isWalkable;
-        }
-
+        
         private IEnumerator MoveToPosition(Vector3 destination)
         {
             OnDeparture();

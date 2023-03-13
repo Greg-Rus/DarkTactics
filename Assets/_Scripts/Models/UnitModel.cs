@@ -8,6 +8,7 @@ namespace _Scripts.Models
         public UnitActionTypes SelectedAction = UnitActionTypes.None;
         public UnitSettings Settings;
         public UnitModelState State;
+        public bool IsAttacking;
 
         public void InitializeWithSettings(UnitSettings settings)
         {

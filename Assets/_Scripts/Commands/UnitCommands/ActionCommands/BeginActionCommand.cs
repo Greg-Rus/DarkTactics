@@ -1,5 +1,4 @@
-﻿using _Scripts.Models;
-using strange.extensions.command.impl;
+﻿using strange.extensions.command.impl;
 using UnityEngine;
 
 namespace _Scripts.Commands.UnitCommands
