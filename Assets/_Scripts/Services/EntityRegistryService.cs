@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Models;
 using strange.extensions.context.impl;
 using UnityEngine;
 
@@ -7,40 +8,38 @@ namespace _Scripts
 {
     public class EntityRegistryService
     {
-        private readonly Dictionary<int, MVCSContext> _entityIdToContextDictionary;
+        private readonly Dictionary<int, EntityFasade> _entityIdToFasadeDictionary;
         private readonly Dictionary<Transform, int> _transformToEntityDictionary;
         private readonly HashSet<int> _playerUnitIds;
         private readonly HashSet<int> _enemyUnitIds;
-        private int nextEntityId = 0;
+        private int nextEntityId = 1;
 
         public EntityRegistryService()
         {
-            _entityIdToContextDictionary = new Dictionary<int, MVCSContext>();
+            _entityIdToFasadeDictionary = new Dictionary<int, EntityFasade>();
             _transformToEntityDictionary = new Dictionary<Transform, int>();
             _playerUnitIds = new HashSet<int>();
             _enemyUnitIds = new HashSet<int>();
         }
 
-        public void RegisterEntity(int entityId, MVCSContext unitContext, Transform transform, EntityTypes type)
+        public void RegisterEntityFasade(EntityFasade fasade)
         {
-            _entityIdToContextDictionary.Add(entityId, unitContext);
-            _transformToEntityDictionary.Add(transform, entityId);
-            switch (type)
+            _entityIdToFasadeDictionary.Add(fasade.EntityModel.Id, fasade);
+            _transformToEntityDictionary.Add(fasade.Transform, fasade.EntityModel.Id);
+            switch (fasade.EntityModel.EntityType)
             {
-                case EntityTypes.PlayerUnit:
-                    _playerUnitIds.Add(entityId);
+                case EntityType.PlayerUnit:
+                    _playerUnitIds.Add(fasade.EntityModel.Id);
                     break;
-                case EntityTypes.EnemyUnit:
-                    _enemyUnitIds.Add(entityId);
+                case EntityType.EnemyUnit:
+                    _enemyUnitIds.Add(fasade.EntityModel.Id);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 
-        public MVCSContext GetEntityContextById(int unitId)
+        public EntityFasade GetFasadeById(int unitId)
         {
-            return _entityIdToContextDictionary[unitId];
+            return _entityIdToFasadeDictionary[unitId];
         }
         
         public int GetEntityIdByTransform(Transform transform)
@@ -48,14 +47,14 @@ namespace _Scripts
             return _transformToEntityDictionary[transform];
         }
         
-        public MVCSContext GetEntityContextByTransform(Transform transform)
+        public EntityFasade GetFasadeByTransform(Transform transform)
         {
-            return GetEntityContextById(GetEntityIdByTransform(transform));
+            return  _entityIdToFasadeDictionary[GetEntityIdByTransform(transform)];
         }
 
         public IEnumerable<int> GetAllEntityIds()
         {
-            return _entityIdToContextDictionary.Keys;
+            return _entityIdToFasadeDictionary.Keys;
         }
         
         public IEnumerable<int> GetAllPlayerUnitId()

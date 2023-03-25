@@ -3,6 +3,6 @@
     public struct EntityData
     {
         public int EntityId;
-        public EntityTypes EntityType;
+        public EntityType EntityType;
     }
 }

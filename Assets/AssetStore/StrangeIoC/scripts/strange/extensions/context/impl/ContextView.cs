@@ -53,7 +53,14 @@ namespace strange.extensions.context.impl
 		protected virtual void OnDestroy()
 		{
 			if (context != null)
+			{
+				if (Context.firstContext == null)
+				{
+					Debug.Log($"!@# {gameObject.name}");
+				}
 				Context.firstContext.RemoveContext(context);
+			}
+			
 		}
 
 		#region IView implementation

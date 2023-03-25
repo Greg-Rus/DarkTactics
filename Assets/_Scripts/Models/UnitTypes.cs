@@ -2,7 +2,7 @@
 {
     public enum UnitTypes
     {
-        TestUnit,
+        BasicPlayerUnit,
         TestLongRangeUnit,
         TestEnemy
     }

@@ -19,7 +19,7 @@ namespace _Scripts.Commands
                 {
                     Id = EntityRegistryService.NextEntityId,
                     InitialPosition = new Vector2Int(1, 0),
-                    Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestUnit)
+                    Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.BasicPlayerUnit)
                 }
             );
             

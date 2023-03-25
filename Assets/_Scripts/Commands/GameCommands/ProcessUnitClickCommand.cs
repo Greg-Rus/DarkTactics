@@ -10,7 +10,6 @@ namespace _Scripts.Commands
     {
         [Inject] public EntityRegistryService EntityRegistryService { get; set; }
         [Inject] public GameSessionModel GameSessionModel { private get; set; }
-
         [Inject] public UiController UiController { private get; set; }
 
         public override void Execute()
@@ -31,8 +30,8 @@ namespace _Scripts.Commands
         {
             GameSessionModel.SelectedUnitId = selectedUnitId;
             
-            EntityRegistryService.GetEntityContextById(selectedUnitId)
-                .dispatcher
+            EntityRegistryService.GetFasadeById(selectedUnitId)
+                .EventDispatcher
                 .Dispatch(UnitEvents.UnitSelected, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
         }
 
@@ -41,8 +40,8 @@ namespace _Scripts.Commands
             if (GameSessionModel.SelectedUnitId.HasValue)
             {
                 var oldUnit = GameSessionModel.SelectedUnitId.Value;
-                EntityRegistryService.GetEntityContextById(oldUnit)
-                    .dispatcher
+                EntityRegistryService.GetFasadeById(oldUnit)
+                    .EventDispatcher
                     .Dispatch(UnitEvents.UnitSelected, new UnitSelectedPayload { SelectedUnitId = selectedUnitId });
             }
         }

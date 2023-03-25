@@ -28,7 +28,7 @@ namespace _Scripts.Commands
                 Settings = Payload.Settings
             });
             
-            EntityRegistryService.RegisterEntity(id, unitContext, unitContextView.transform, EntityTypes.PlayerUnit);
+            EntityRegistryService.RegisterEntityFasade(unitContext.EntityFasade);
         }
     }
 }

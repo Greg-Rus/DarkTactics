@@ -19,7 +19,9 @@ namespace _Scripts.Commands
 
             foreach (var id in EntityRegistryService.GetAllPlayerUnitId())
             {
-                EntityRegistryService.GetEntityContextById(id).dispatcher.Dispatch(UnitEvents.TurnStarted);
+                EntityRegistryService.GetFasadeById(id)
+                    .EventDispatcher
+                    .Dispatch(UnitEvents.TurnStarted);
             }
         }
     }

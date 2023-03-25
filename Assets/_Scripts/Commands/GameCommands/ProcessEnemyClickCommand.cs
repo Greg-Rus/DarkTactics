@@ -18,8 +18,8 @@ namespace _Scripts.Commands
             var enemyId = EntityRegistryService.GetEntityIdByTransform(Payload.TargetTransform);
             var enemyCoordinate = GridService.GetUnitCoordinatesByUnitId(enemyId);
                 
-            EntityRegistryService.GetEntityContextById(GameSessionModel.SelectedUnitId.Value)
-                .dispatcher
+            EntityRegistryService.GetFasadeById(GameSessionModel.SelectedUnitId.Value)
+                .EventDispatcher
                 .Dispatch(UnitEvents.EnemySelected, new AttackActionPayload()
                 {
                     TargetTransform = Payload.TargetTransform,

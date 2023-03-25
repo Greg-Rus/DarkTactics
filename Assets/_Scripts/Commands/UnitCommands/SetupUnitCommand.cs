@@ -11,7 +11,7 @@ namespace _Scripts.Commands
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public GridService GridService { private get; set; }
         [Inject] public UnitContextRoot UnitContextRoot { private get; set; }
-        
+
         public override void Execute()
         {
             var worldPosition = GridService.GridCoordinateToWorldPosition(Payload.GridPosition);

@@ -5,7 +5,7 @@ using strange.extensions.command.impl;
 
 namespace _Scripts.Commands.UnitCommands
 {
-    public class FilterAttackActionCommand : EventCommand<AttackActionPayload>
+    public class CanPerformAttackActionCommand : EventCommand<AttackActionPayload>
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public UnitStateController UnitStateController { private get; set; }

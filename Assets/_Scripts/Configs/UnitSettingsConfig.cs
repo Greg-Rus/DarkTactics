@@ -24,7 +24,7 @@ namespace _Scripts
     public class UnitSettings
     {
         [HideInInspector] public string Name;
-        public EntityTypes EntityType;
+        public EntityType EntityType;
         public UnitTypes UnitType;
         public int MovementRange;
         public int AttackRange;

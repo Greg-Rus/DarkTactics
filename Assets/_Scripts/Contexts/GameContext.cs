@@ -36,10 +36,7 @@ namespace _Scripts
                 .ToValue(new VirtualCameraController(_view.VirtualCamera, _view.CameraTarget));
 
             commandBinder.Bind(GameEvents.SpawnUnit).To<SpawnUnitCommand>();
-            commandBinder.Bind(GameEvents.MouseClickGround)
-                .To<MoveSelectedUnitCommand>()
-                //.To<SnapCameraToUnitDestination>() TODO: This was just a test. Ideally the camera should follow the unit so this should be requested by the unit itself.
-                .InSequence();
+            commandBinder.Bind(GameEvents.MouseClickGround).To<MoveSelectedUnitCommand>();
             commandBinder.Bind(GameEvents.MouseClickUnit).To<ProcessUnitClickCommand>();
  
             commandBinder.Bind(GameEvents.MouseClickEnemy).To<ProcessEnemyClickCommand>();

@@ -22,8 +22,8 @@ namespace _Scripts.Commands
 
             if (gridCellModel == null) return;
 
-            var unit = EntityRegistryService.GetEntityContextById(GameSessionModel.SelectedUnitId.Value);
-            unit.dispatcher.Dispatch(UnitEvents.GridCellSelected, gridCellModel);
+            var unit = EntityRegistryService.GetFasadeById(GameSessionModel.SelectedUnitId.Value);
+            unit.EventDispatcher.Dispatch(UnitEvents.GridCellSelected, gridCellModel);
         }
     }
 }

@@ -1,20 +1,19 @@
 ﻿using _Scripts.Helpers;
 using _Scripts.Models;
-using RPGCharacterAnims.Lookups;
 using strange.extensions.command.impl;
-using UnityEngine;
 
 namespace _Scripts.Commands.UnitCommands
 {
-    public class HandleAttackSelectionCommand : EventCommand
+    public class VisualizeAttackSelectionCommand : EventCommand
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public UiController UiController { private get; set; }
         [Inject] public GridVisualsService GridVisualsService { private get; set; }
         public override void Execute()
         {
-            UnitModel.SelectedAction = UnitActionTypes.Attack;
-            new UpdateAttackRangeCellsCommand().InjectWith(injectionBinder).Execute();
+            //new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute(); TODO: Not sure if necessary.
+            UiController.HighlightSelectedAction(UnitActionTypes.Attack);
+            GridVisualsService.DrawAttacableGrid(UnitModel.ActionRangeCells);
         }
     }
 }

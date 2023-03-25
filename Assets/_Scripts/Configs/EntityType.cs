@@ -1,6 +1,6 @@
 ﻿namespace _Scripts
 {
-    public enum EntityTypes
+    public enum EntityType
     {
         PlayerUnit,
         EnemyUnit

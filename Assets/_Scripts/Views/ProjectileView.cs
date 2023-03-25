@@ -24,8 +24,8 @@ namespace _Scripts.Views
         void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Touch start");
-            var hitUnit = EntityRegistryService.GetEntityContextByTransform(collision.collider.transform);
-            hitUnit.dispatcher.Dispatch(UnitEvents.HitTaken, _damageEffect);
+            var hitUnit = EntityRegistryService.GetFasadeByTransform(collision.collider.transform);
+            hitUnit.EventDispatcher.Dispatch(UnitEvents.HitTaken, _damageEffect);
             Destroy(gameObject);
         }
     }
