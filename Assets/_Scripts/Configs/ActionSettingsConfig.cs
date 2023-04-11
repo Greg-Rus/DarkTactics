@@ -10,16 +10,16 @@ namespace _Scripts
     {
         public ActionConfig[] ActionSettings;
 
-        public int GetActionCost(UnitActionTypes type)
+        public int GetActionCost(UnitActionType type)
         {
-            return ActionSettings.Single(config => config.Type == type).ActionPointCost;
+            return ActionSettings.Single(config => config.type == type).ActionPointCost;
         }
     }
 
     [Serializable]
     public class ActionConfig
     {
-        public UnitActionTypes Type;
+        public UnitActionType type;
         public int ActionPointCost;
     }
 }

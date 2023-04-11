@@ -21,10 +21,10 @@ namespace _Scripts.Commands.UnitCommands
             {
                 switch (action)
                 {
-                    case UnitActionTypes.Move:
+                    case UnitActionType.Move:
                         UiController.AddMoveActionListener(Dispatcher);
                         break;
-                    case UnitActionTypes.Attack:
+                    case UnitActionType.Attack:
                         UiController.AddAttackActionListener(Dispatcher);
                         break;
                     default:

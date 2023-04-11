@@ -10,7 +10,7 @@ namespace _Scripts.Commands.UnitCommands
 
         public override void Execute()
         {
-            if (UnitStateController.TryDeductActionPointsForAction(UnitActionTypes.Move) == false)
+            if (UnitStateController.TryDeductActionPointsForAction(UnitActionType.Move) == false)
             {
                 Fail();
             }

@@ -12,7 +12,7 @@ namespace _Scripts
         public UnitPrefabMapping[] UnitPrefabMap;
         public ProjectileView Projectile;
 
-        public UnitContextRoot GetPrefabForUnitType(UnitTypes type)
+        public UnitContextRoot GetPrefabForUnitType(UnitType type)
         {
             return UnitPrefabMap.Single(mapping => mapping.UnitTypes.Contains(type)).UnitPrefab;
         }
@@ -21,7 +21,7 @@ namespace _Scripts
     [Serializable]
     public class UnitPrefabMapping
     {
-        public UnitTypes[] UnitTypes;
+        public UnitType[] UnitTypes;
         public UnitContextRoot UnitPrefab;
     }
 }

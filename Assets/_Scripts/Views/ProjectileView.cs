@@ -11,10 +11,6 @@ namespace _Scripts.Views
 
         private DamageEffectConfig _damageEffect;
 
-        private void Awake()
-        {
-            Debug.Log("Projectile awake");
-        }
 
         public void Init(DamageEffectConfig damageEffect)
         {
@@ -23,7 +19,6 @@ namespace _Scripts.Views
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Touch start");
             var hitUnit = EntityRegistryService.GetFasadeByTransform(collision.collider.transform);
             hitUnit.EventDispatcher.Dispatch(UnitEvents.HitTaken, _damageEffect);
             Destroy(gameObject);

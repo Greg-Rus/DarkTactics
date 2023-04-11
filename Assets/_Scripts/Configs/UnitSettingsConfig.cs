@@ -25,13 +25,21 @@ namespace _Scripts
     {
         [HideInInspector] public string Name;
         public EntityType EntityType;
-        public UnitTypes UnitType;
+        public UnitType UnitType;
         public int MovementRange;
         public int AttackRange;
         public DamageEffectConfig AttackDamageEffect;
-        public UnitActionTypes[] Actions;
+        public UnitActionType[] Actions;
+        public AiBehaviour[] AiBehaviours;
         public int BaseHitPoints;
         public int BaseActionPoints;
         public int BaseSpellPoints;
+    }
+
+    [Serializable]
+    public class AiBehaviour
+    {
+        public AiBehaviourType Behaviour;
+        public int Score;
     }
 }

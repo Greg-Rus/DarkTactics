@@ -13,7 +13,7 @@ namespace _Scripts.Commands.UnitCommands
         [Inject] public GridVisualsService GridVisualsService { private get; set; }
         public override void Execute()
         {
-            UnitModel.SelectedAction = UnitActionTypes.Attack;
+            UnitModel.SelectedAction = UnitActionType.Attack;
             new UpdateAttackRangeCellsCommand().InjectWith(injectionBinder).Execute();
         }
     }

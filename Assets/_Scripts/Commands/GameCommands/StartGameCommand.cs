@@ -15,29 +15,36 @@ namespace _Scripts.Commands
         public override void Execute()
         {
             GridService.Initialize();
-            dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
+            dispatcher.Dispatch(GameEvent.SpawnUnit, new SpawnEventPayload()
                 {
                     Id = EntityRegistryService.NextEntityId,
                     InitialPosition = new Vector2Int(1, 0),
-                    Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.BasicPlayerUnit)
+                    Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitType.BasicPlayerUnit)
                 }
             );
             
-            dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
+            dispatcher.Dispatch(GameEvent.SpawnUnit, new SpawnEventPayload()
             {
                 Id = EntityRegistryService.NextEntityId,
                 InitialPosition = new Vector2Int(4, 0),
-                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestLongRangeUnit)
+                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitType.TestLongRangeUnit)
             });
             
-            dispatcher.Dispatch(GameEvents.SpawnUnit, new SpawnEventPayload()
+            dispatcher.Dispatch(GameEvent.SpawnUnit, new SpawnEventPayload()
             {
                 Id = EntityRegistryService.NextEntityId,
                 InitialPosition = new Vector2Int(2, 4),
-                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitTypes.TestEnemy)
+                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitType.MeleeEnemy)
             });
             
-            dispatcher.Dispatch(GameEvents.StartPlayerTurn);
+            dispatcher.Dispatch(GameEvent.SpawnUnit, new SpawnEventPayload()
+            {
+                Id = EntityRegistryService.NextEntityId,
+                InitialPosition = new Vector2Int(3, 5),
+                Settings = UnitSettingsConfig.UnitSettings.First(config => config.UnitType == UnitType.RangedEnemy)
+            });
+            
+            dispatcher.Dispatch(GameEvent.StartPlayerTurn);
         }
     }
 }

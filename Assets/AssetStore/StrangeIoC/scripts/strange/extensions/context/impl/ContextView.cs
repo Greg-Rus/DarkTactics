@@ -54,10 +54,6 @@ namespace strange.extensions.context.impl
 		{
 			if (context != null)
 			{
-				if (Context.firstContext == null)
-				{
-					Debug.Log($"!@# {gameObject.name}");
-				}
 				Context.firstContext.RemoveContext(context);
 			}
 			

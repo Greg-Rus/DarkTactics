@@ -12,7 +12,7 @@ namespace _Scripts.Commands.UnitCommands
         public override void Execute()
         {
             //new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute(); TODO: Not sure if necessary.
-            UiController.HighlightSelectedAction(UnitActionTypes.Attack);
+            UiController.HighlightSelectedAction(UnitActionType.Attack);
             GridVisualsService.DrawAttacableGrid(UnitModel.ActionRangeCells);
         }
     }

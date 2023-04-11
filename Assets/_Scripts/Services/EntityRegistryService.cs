@@ -46,6 +46,11 @@ namespace _Scripts
         {
             return _transformToEntityDictionary[transform];
         }
+
+        public Transform GetTransformByEntityId(int id)
+        {
+            return GetFasadeById(id).Transform;
+        }
         
         public EntityFasade GetFasadeByTransform(Transform transform)
         {

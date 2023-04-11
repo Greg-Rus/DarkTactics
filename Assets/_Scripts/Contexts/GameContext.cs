@@ -1,6 +1,7 @@
 using _Scripts.Commands;
 using _Scripts.Controllers;
 using _Scripts.Models;
+using _Scripts.Services;
 using strange.extensions.context.api;
 using strange.extensions.context.impl;
 using Unity.VisualScripting;
@@ -27,25 +28,26 @@ namespace _Scripts
                 .ToValue(new GridService(20, 20, 1)).CrossContext();
             injectionBinder.Bind<GridVisualsService>().ToSingleton()
                 .ToValue(new GridVisualsService(_view.GridVisualsRoot, _view.GridVisualView)).CrossContext();
-            injectionBinder.Bind<CoroutineService>().ToSingleton();
+            injectionBinder.Bind<CoroutineService>().ToSingleton().CrossContext();
             injectionBinder.Bind<ProjectileFactory>().ToSingleton().CrossContext();
-            injectionBinder.Bind<UnitModel>();
+            //injectionBinder.Bind<UnitModel>();
             injectionBinder.Bind<InputService>().ToSingleton().CrossContext();
             injectionBinder.Bind<GameSessionModel>().ToSingleton().CrossContext();
+            injectionBinder.Bind<EnemyTurnService>().ToSingleton().CrossContext();;
             injectionBinder.Bind<VirtualCameraController>().ToSingleton()
                 .ToValue(new VirtualCameraController(_view.VirtualCamera, _view.CameraTarget));
 
-            commandBinder.Bind(GameEvents.SpawnUnit).To<SpawnUnitCommand>();
-            commandBinder.Bind(GameEvents.MouseClickGround).To<MoveSelectedUnitCommand>();
-            commandBinder.Bind(GameEvents.MouseClickUnit).To<ProcessUnitClickCommand>();
+            commandBinder.Bind(GameEvent.SpawnUnit).To<SpawnUnitCommand>();
+            commandBinder.Bind(GameEvent.MouseClickGround).To<MoveSelectedUnitCommand>();
+            commandBinder.Bind(GameEvent.MouseClickUnit).To<ProcessUnitClickCommand>();
  
-            commandBinder.Bind(GameEvents.MouseClickEnemy).To<ProcessEnemyClickCommand>();
-            commandBinder.Bind(GameEvents.ManualCameraMove).To<ManualMoveCameraCommand>().Pooled();
+            commandBinder.Bind(GameEvent.MouseClickEnemy).To<ProcessEnemyClickCommand>();
+            commandBinder.Bind(GameEvent.ManualCameraMove).To<ManualMoveCameraCommand>().Pooled();
             
-            commandBinder.Bind(GameEvents.StartPlayerTurn).To<StartPlayerTurnCommand>();
-            commandBinder.Bind(GameEvents.EndPlayerTurn).To<EndPlayerTurnCommand>();
-            commandBinder.Bind(GameEvents.StartEnemyTurn).To<StartEnemyTurnCommand>();
-            commandBinder.Bind(GameEvents.EndEnemyTurn).To<EndEnemyTurnCommand>();
+            commandBinder.Bind(GameEvent.StartPlayerTurn).To<StartPlayerTurnCommand>();
+            commandBinder.Bind(GameEvent.EndPlayerTurn).To<EndPlayerTurnCommand>();
+            commandBinder.Bind(GameEvent.StartEnemyTurn).To<StartEnemyTurnCommand>();
+            commandBinder.Bind(GameEvent.EndEnemyTurn).To<EndEnemyTurnCommand>();
             
             commandBinder.Bind(ContextEvent.START)
                 .To<InitializeServicesCommand>()

@@ -24,9 +24,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/69/464a3eff/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Events/GameEventPayloads/MouseClickUnitPayload.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.8.9/Runtime/Behaviours/CinemachineVirtualCamera.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/43/431a295e/IList`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/94/2b126b24/Nullable`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/26/e9191c59/WaitUntil.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4746c126b0b54f3b834845974d1a9190159000/36/2ff2a747/HideInInspector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/2e/a5dfb722/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/4c/ade3ff25/WaitForSeconds.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6afd1274f120405096bc1ad9e2010ba6157a00/da/7bf290ed/CustomYieldInstruction.cs" root0="SKIP_HIGHLIGHTING" />
@@ -42,8 +44,9 @@
   <component name="PropertiesComponent">
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.35685322" />
     <property name="rider.run.widget.enabled.cache" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="RiderCSharpLiveTemplatesSettingsId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -65,10 +68,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="32404">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="32404" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -117,7 +120,15 @@
       <workItem from="1678641815217" duration="5271000" />
       <workItem from="1678740369734" duration="7010000" />
       <workItem from="1679136500932" duration="8565000" />
-      <workItem from="1679745237495" duration="6754000" />
+      <workItem from="1679745237495" duration="9103000" />
+      <workItem from="1679827620319" duration="7809000" />
+      <workItem from="1679869314020" duration="44000" />
+      <workItem from="1679946499415" duration="4854000" />
+      <workItem from="1680116827271" duration="6239000" />
+      <workItem from="1680429432056" duration="2085000" />
+      <workItem from="1681041281988" duration="9749000" />
+      <workItem from="1681114670212" duration="12502000" />
+      <workItem from="1681211054636" duration="6977000" />
     </task>
     <servers />
   </component>
@@ -131,6 +142,62 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Commands/UnitCommands/ActionCommands/PerformMoveActionCommand.cs</url>
+          <line>80</line>
+          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Commands\UnitCommands\ActionCommands\PerformMoveActionCommand.cs" initialLine="80" containingFunctionPresentation="method 'OnArrival'">
+            <startOffsets>
+              <option value="2975" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3038" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Commands/UnitCommands/AiCommands/BehaviourEvaluationCommands/EvaluateMoveToMeleeRangeOfClosestPlayerUnitCommand.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Commands\UnitCommands\AiCommands\BehaviourEvaluationCommands\EvaluateMoveToMeleeRangeOfClosestPlayerUnitCommand.cs" initialLine="26" containingFunctionPresentation="method 'Execute'">
+            <startOffsets>
+              <option value="901" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1053" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Services/GridService.cs</url>
+          <line>217</line>
+          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Services\GridService.cs" initialLine="217" containingFunctionPresentation="method 'GetClosestCellInRangeTowardsTarget'">
+            <startOffsets>
+              <option value="7317" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7336" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/Controllers/UnitBrain.cs</url>
+          <line>43</line>
+          <properties documentPath="C:\Unity Projects\DarkTactics\Assets\_Scripts\Controllers\UnitBrain.cs" initialLine="43" containingFunctionPresentation="method 'SelectBestAction'">
+            <startOffsets>
+              <option value="1388" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1508" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#System.Collections.Generic.KeyValuePair`2" memberName="Key" />

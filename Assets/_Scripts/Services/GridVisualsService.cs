@@ -80,7 +80,6 @@ namespace _Scripts
 
         private void SpawnViews(int viewCount)
         {
-            Debug.Log($"Spawning extra {viewCount} views");
             for (int i = 0; i < viewCount; i++)
             {
                 var view = GameObject.Instantiate(prefab, gridVisualsRoot);

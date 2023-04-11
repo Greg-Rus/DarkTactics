@@ -22,9 +22,9 @@ namespace _Scripts.Commands.UnitCommands
             Fail();
         }
 
-        private bool IsSelectedActionAttack => UnitModel.SelectedAction == UnitActionTypes.Attack;
+        private bool IsSelectedActionAttack => UnitModel.SelectedAction == UnitActionType.Attack;
         private bool IsAlreadyAttacking => UnitModel.IsAttacking;
-        private bool HasEnoughActionPointsToAttack => UnitStateController.CanPerformAction(UnitActionTypes.Attack);
+        private bool HasEnoughActionPointsToAttack => UnitStateController.CanPerformAction(UnitActionType.Attack);
         private bool IsTargetInRange => UnitSensor.IsCellInRange(Payload.TargetCoordinates);
     }
 }

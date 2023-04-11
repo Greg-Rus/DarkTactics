@@ -1,6 +1,6 @@
 namespace _Scripts
 {
-    public enum GameEvents
+    public enum GameEvent
     {
         SpawnUnit,
         MouseClickGround,

@@ -1,9 +1,10 @@
 ﻿namespace _Scripts.Models
 {
-    public enum UnitTypes
+    public enum UnitType
     {
         BasicPlayerUnit,
         TestLongRangeUnit,
-        TestEnemy
+        MeleeEnemy,
+        RangedEnemy
     }
 }

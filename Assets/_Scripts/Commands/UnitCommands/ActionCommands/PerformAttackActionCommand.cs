@@ -20,7 +20,7 @@ namespace _Scripts.Commands.UnitCommands
         
         public override void Execute()
         {
-            Debug.Log("Perform Attack");
+            Debug.Log($"{LogHelper.ActionTag} Attacking...");
             Retain();
             RootView.StartCoroutine(DoAttack(Payload.TargetTransform));
         }

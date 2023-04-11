@@ -3,7 +3,7 @@ namespace _Scripts.Models
     public class UnitModel : EntityModel
     {
         public GridCellModel[,] ActionRangeCells;
-        public UnitActionTypes SelectedAction = UnitActionTypes.None;
+        public UnitActionType SelectedAction = UnitActionType.None;
         public UnitSettings Settings;
         public UnitModelState State;
         public bool IsAttacking;

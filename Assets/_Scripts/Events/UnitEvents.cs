@@ -8,5 +8,7 @@
         GridCellSelected,
         TurnStarted,
         HitTaken,
+        ActionEnded,
+        TakeTurn
     }
 }

@@ -19,7 +19,7 @@ namespace _Scripts.Commands
 
         public override void Execute()
         {
-            Debug.Log("Perform Move");
+            Debug.Log($"{LogHelper.ActionTag} Moving...");
             Retain();
             RootView.StopAllCoroutines();
             var cellWorldPosition = GridService.GridCoordinateToWorldPosition(Payload.Coordinates);

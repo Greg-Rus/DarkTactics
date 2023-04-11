@@ -23,7 +23,7 @@ namespace _Scripts
 
         public void Initialize()
         {
-            view.EndTurnButton.onClick.AddListener(() => CrossContextDispatcher.Dispatch(GameEvents.EndPlayerTurn));
+            view.EndTurnButton.onClick.AddListener(() => CrossContextDispatcher.Dispatch(GameEvent.EndPlayerTurn));
             ResetActionButtons();
             RemoveAllListeners();
             ToggleUnitStats(false);
@@ -63,16 +63,16 @@ namespace _Scripts
             AttackActionButton.Button.interactable = areInteractible;
         }
 
-        public void SetActionButtonInteractable(UnitActionTypes action, bool isInteractable)
+        public void SetActionButtonInteractable(UnitActionType action, bool isInteractable)
         {
             switch (action)
             {
-                case UnitActionTypes.None:
+                case UnitActionType.None:
                     break;
-                case UnitActionTypes.Move:
+                case UnitActionType.Move:
                     MoveActionButton.Button.interactable = isInteractable;
                     break;
-                case UnitActionTypes.Attack:
+                case UnitActionType.Attack:
                     AttackActionButton.Button.interactable = isInteractable;
                     break;
                 default:
@@ -80,17 +80,17 @@ namespace _Scripts
             }
         }
 
-        public void HighlightSelectedAction(UnitActionTypes action)
+        public void HighlightSelectedAction(UnitActionType action)
         {
             switch (action)
             {
-                case UnitActionTypes.None:
+                case UnitActionType.None:
                     ResetActionButtons();
                     break;
-                case UnitActionTypes.Move:
+                case UnitActionType.Move:
                     EnableHighlightOnButton(MoveActionButton);
                     break;
-                case UnitActionTypes.Attack:
+                case UnitActionType.Attack:
                     EnableHighlightOnButton(AttackActionButton);
                     break;
                 default:

@@ -23,7 +23,6 @@ namespace _Scripts
         public override void Launch()
         {
             base.Launch();
-            Debug.Log("Application context is live");
             SceneManager.LoadScene(2, LoadSceneMode.Additive);
         }
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ActionSettingsConfig
   m_EditorClassIdentifier: 
   ActionSettings:
-  - Type: 1
+  - type: 1
     ActionPointCost: 1
-  - Type: 2
+  - type: 2
     ActionPointCost: 1

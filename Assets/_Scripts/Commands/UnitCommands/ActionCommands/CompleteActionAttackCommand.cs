@@ -10,8 +10,8 @@ namespace _Scripts.Commands.UnitCommands
         [Inject] public UiController UiController { private get; set; }
         public override void Execute()
         {
-            UnitModel.SelectedAction = UnitActionTypes.None;
-            UiController.HighlightSelectedAction(UnitActionTypes.None);
+            UnitModel.SelectedAction = UnitActionType.None;
+            UiController.HighlightSelectedAction(UnitActionType.None);
             new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute();
             base.Execute();
         }

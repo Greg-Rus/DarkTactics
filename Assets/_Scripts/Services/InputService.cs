@@ -27,20 +27,20 @@ namespace _Scripts
                 
                 if (Physics.Raycast(ray, out RaycastHit hitUnit, float.PositiveInfinity, ContextMediator.UnitLayerMask))
                 {
-                    Dispatcher.Dispatch(GameEvents.MouseClickUnit,  new MouseClickUnitPayload { UnitTransform = hitUnit.transform});
+                    Dispatcher.Dispatch(GameEvent.MouseClickUnit,  new MouseClickUnitPayload { UnitTransform = hitUnit.transform});
                     return;
                 }
                 
                 if (Physics.Raycast(ray, out RaycastHit hitEnemy, float.PositiveInfinity, ContextMediator.EnemyLayerMask))
                 {
-                    Dispatcher.Dispatch(GameEvents.MouseClickEnemy,  new AttackActionPayload() { TargetTransform = hitEnemy.collider.transform});
+                    Dispatcher.Dispatch(GameEvent.MouseClickEnemy,  new AttackActionPayload() { TargetTransform = hitEnemy.collider.transform});
                     return;
                 }
 
                 if (Physics.Raycast(ray, out RaycastHit hitGround, float.PositiveInfinity, ContextMediator.GroundLayerMask))
                 {
                     ContextMediator.DebugMousePointer.transform.position = hitGround.point;
-                    Dispatcher.Dispatch(GameEvents.MouseClickGround,  new MouseClickGroundPayload { ClickPosition = hitGround.point});
+                    Dispatcher.Dispatch(GameEvent.MouseClickGround,  new MouseClickGroundPayload { ClickPosition = hitGround.point});
                 }
             }
             
@@ -84,7 +84,7 @@ namespace _Scripts
 
             if (cameraMoveOffset != Vector3.zero || rotationDirection != 0 || zoomDirection != 0)
             {
-                Dispatcher.Dispatch(GameEvents.ManualCameraMove, new ManualCameraMovePayload
+                Dispatcher.Dispatch(GameEvent.ManualCameraMove, new ManualCameraMovePayload
                 {
                     Translation = cameraMoveOffset,
                     RotationDirection = rotationDirection,

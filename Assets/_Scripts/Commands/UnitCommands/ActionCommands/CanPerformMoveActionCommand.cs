@@ -23,8 +23,8 @@ namespace _Scripts.Commands.UnitCommands
             Fail();
         }
 
-        private bool IsActionTypeMove => UnitModel.SelectedAction == UnitActionTypes.Move;
-        private bool HasEnoughActionPoints => UnitStateController.CanPerformAction(UnitActionTypes.Move);
+        private bool IsActionTypeMove => UnitModel.SelectedAction == UnitActionType.Move;
+        private bool HasEnoughActionPoints => UnitStateController.CanPerformAction(UnitActionType.Move);
         private bool DestinationCellIsWalkable => UnitSensor.IsCellWalkable(Payload);
         private bool DestinationCellIsInRange => UnitSensor.IsCellInRange(Payload);
     }

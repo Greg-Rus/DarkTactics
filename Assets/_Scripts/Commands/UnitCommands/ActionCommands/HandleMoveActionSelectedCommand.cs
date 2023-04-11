@@ -12,9 +12,9 @@ namespace _Scripts.Commands.UnitCommands
 
         public override void Execute()
         {
-            if (UnitStateController.CanPerformAction(UnitActionTypes.Move))
+            if (UnitStateController.CanPerformAction(UnitActionType.Move))
             {
-                UnitModel.SelectedAction = UnitActionTypes.Move;
+                UnitModel.SelectedAction = UnitActionType.Move;
                 new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
             }
             else

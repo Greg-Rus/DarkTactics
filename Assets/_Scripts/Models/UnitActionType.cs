@@ -1,6 +1,6 @@
 ﻿namespace _Scripts.Models
 {
-    public enum UnitActionTypes
+    public enum UnitActionType
     {
         None = 0,
         Move,
