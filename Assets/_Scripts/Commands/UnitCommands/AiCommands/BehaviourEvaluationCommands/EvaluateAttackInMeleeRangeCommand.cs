@@ -20,14 +20,14 @@ namespace _Scripts.Commands.UnitCommands.AiCommands
                 .InjectWith(injectionBinder)
                 .Execute();
 
-            if (closestUnit.Distance <= 1.42f) //account for diagonal cells
+            if (closestUnit.Distance <= 1.42f) //account for diagonal tiles
             {
                 return new AiAction()
                 {
                     Score = _aiBehaviour.Score,
                     ActionType = UnitActionType.Attack,
                     TargetUnitId = closestUnit.EntityId,
-                    TargetGridCellCoordinates = closestUnit.Position
+                    TargetTileCoordinates = closestUnit.Position
                 };
             }
             

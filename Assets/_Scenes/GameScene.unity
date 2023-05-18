@@ -132,20 +132,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 330585546, guid: 7f943ed707a06df48ba94e1e8179db81, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000187227
+      value: 0.0000000187227
       objectReference: {fileID: 0}
     - target: {fileID: 330585546, guid: 7f943ed707a06df48ba94e1e8179db81, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000044198294
+      value: -0.0000000044198294
       objectReference: {fileID: 0}
     - target: {fileID: 1510181704, guid: 7f943ed707a06df48ba94e1e8179db81, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000187227
+      value: 0.0000000187227
       objectReference: {fileID: 0}
     - target: {fileID: 1510181704, guid: 7f943ed707a06df48ba94e1e8179db81, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000044198294
+      value: -0.0000000044198294
       objectReference: {fileID: 0}
+    - target: {fileID: 1867820265057668870, guid: 7f943ed707a06df48ba94e1e8179db81,
+        type: 3}
+      propertyPath: DebugTileMarker
+      value: 
+      objectReference: {fileID: 1880218292224913618, guid: d4e2151d6894eb946a9f16ab1d0290fb,
+        type: 3}
     - target: {fileID: 3024966783869773704, guid: 7f943ed707a06df48ba94e1e8179db81,
         type: 3}
       propertyPath: m_Name

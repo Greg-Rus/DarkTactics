@@ -2,7 +2,7 @@ namespace _Scripts.Models
 {
     public class UnitModel : EntityModel
     {
-        public GridCellModel[,] ActionRangeCells;
+        public TileModel[,] ActionRangeTiles;
         public UnitActionType SelectedAction = UnitActionType.None;
         public UnitSettings Settings;
         public UnitModelState State;

@@ -20,10 +20,10 @@ namespace _Scripts.Commands.UnitCommands.AiCommands
 
         public override void Execute()
         {
-            Debug.Log($"{LogHelper.AITag}: Moving to {_action.TargetGridCellCoordinates.Value}");
+            Debug.Log($"{LogHelper.AITag}: Moving to {_action.TargetTileCoordinates.Value}");
             
             EventDispatcher.Dispatch(InputEvents.MoveActionSelected);
-            EventDispatcher.Dispatch(UnitEvents.GridCellSelected, GridService.GridCoordinateToGridCellModel(_action.TargetGridCellCoordinates.Value));
+            EventDispatcher.Dispatch(UnitEvents.TileSelected, GridService.GridCoordinateToTileModel(_action.TargetTileCoordinates.Value));
         }
     }
 }

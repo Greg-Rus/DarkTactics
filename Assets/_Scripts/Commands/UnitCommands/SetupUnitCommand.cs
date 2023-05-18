@@ -21,14 +21,14 @@ namespace _Scripts.Commands
             UnitContextRoot.transform.position = worldPosition;
             
             UnitModel.InitializeWithSettings(Payload.Settings);
-            UnitModel.OccupiedCellModel = GridService.GridCoordinateToGridCellModel(Payload.GridPosition);
+            UnitModel.OccupiedTileModel = GridService.GridCoordinateToTileModel(Payload.GridPosition);
 
-            if (UnitModel.OccupiedCellModel == null)
+            if (UnitModel.OccupiedTileModel == null)
             {
                 throw new InvalidDataException($"{Payload.GridPosition} is outside the Grid");
             }
             
-            UnitModel.OccupiedCellModel.Entities.Add(UnitModel.Id);
+            UnitModel.OccupiedTileModel.Entities.Add(UnitModel.Id);
 
             dispatcher.Dispatch(UnitEvents.UnitSelected, new UnitSelectedPayload(){SelectedUnitId = -1});
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace _Scripts.Models
 {
-    public class GridCellModel
+    public class TileModel
     {
         public Vector2Int Coordinates;
         public readonly HashSet<int> Entities; 
 
-        public GridCellModel(Vector2Int coordinates)
+        public TileModel(Vector2Int coordinates)
         {
             Coordinates = coordinates;
             Entities = new HashSet<int>();

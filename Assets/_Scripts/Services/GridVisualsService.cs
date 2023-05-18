@@ -32,34 +32,34 @@ namespace _Scripts
             occupiedViews = new List<GridVisualView>();
         }
 
-        public void DrawWalkableGrid(GridCellModel[,] walkableCellModels)
+        public void DrawWalkableGrid(TileModel[,] walkableTileModels)
         {
-            DrawGrid(walkableCellModels, GridStyle.Walkable);
+            DrawGrid(walkableTileModels, GridStyle.Walkable);
         }
 
-        public void DrawAttacableGrid(GridCellModel[,] walkableCellModels)
+        public void DrawAttacableGrid(TileModel[,] walkableTileModels)
         {
-            DrawGrid(walkableCellModels, GridStyle.Attackable);
+            DrawGrid(walkableTileModels, GridStyle.Attackable);
         }
 
-        private void DrawGrid(GridCellModel[,] walkableCellModels, GridStyle style)
+        private void DrawGrid(TileModel[,] walkableTileModels, GridStyle style)
         {
             ClearGrid();
             
-            if (walkableCellModels.Length > freeViews.Count)
+            if (walkableTileModels.Length > freeViews.Count)
             {
-                SpawnViews(walkableCellModels.Length - freeViews.Count);
+                SpawnViews(walkableTileModels.Length - freeViews.Count);
             }
             
-            for (int x = 0; x <= walkableCellModels.GetUpperBound(0); x++)
+            for (int x = 0; x <= walkableTileModels.GetUpperBound(0); x++)
             {
-                for (int y = 0; y <= walkableCellModels.GetUpperBound(1); y++)
+                for (int y = 0; y <= walkableTileModels.GetUpperBound(1); y++)
                 {
-                    var model = walkableCellModels[x, y];
+                    var model = walkableTileModels[x, y];
                     if (model == null) continue;
                     
                     var coordinate = new Vector2Int(x, y);   
-                    SetupView(coordinate, walkableCellModels, style);
+                    SetupView(coordinate, walkableTileModels, style);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace _Scripts
             }
         }
 
-        private void SetupView(Vector2Int coordinate, GridCellModel[,] map, GridStyle style)
+        private void SetupView(Vector2Int coordinate, TileModel[,] map, GridStyle style)
         {
             var view = freeViews.Dequeue();
             occupiedViews.Add(view);
@@ -121,13 +121,13 @@ namespace _Scripts
             
         }
 
-        private bool HasBorderAtLocalCoordinate(Vector2Int localOffset, GridCellModel[,] cells)
+        private bool HasBorderAtLocalCoordinate(Vector2Int localOffset, TileModel[,] tiles)
         {
             var hasBorder = true;
-            if (localOffset.x >= 0 & localOffset.x <= cells.GetUpperBound(0) && localOffset.y >= 0 &&
-                localOffset.y <= cells.GetUpperBound(1))
+            if (localOffset.x >= 0 & localOffset.x <= tiles.GetUpperBound(0) && localOffset.y >= 0 &&
+                localOffset.y <= tiles.GetUpperBound(1))
             {
-                if (cells[localOffset.x, localOffset.y] != null)
+                if (tiles[localOffset.x, localOffset.y] != null)
                 {
                     hasBorder = false;
                 }

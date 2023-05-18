@@ -14,7 +14,7 @@ namespace _Scripts
         }
 
         [Header("Prefabs")]
-        public DebugGridCellView DebugGridCellMarker;
+        public DebugTileView DebugTileMarker;
         public GameObject DebugMousePointer;
         public GridVisualView GridVisualView;
         

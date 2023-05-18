@@ -43,6 +43,8 @@ namespace _Scripts.Controllers
             }
         }
 
+        public bool IsAlive => UnitModel.State.HitPoints > 0;
+
         // public void ChangeUnitHitPointsByAmount(int changeAmount)
         // {
         //     UnitModel.State.HitPoints = Math.Max(UnitModel.State.HitPoints + changeAmount, 0);

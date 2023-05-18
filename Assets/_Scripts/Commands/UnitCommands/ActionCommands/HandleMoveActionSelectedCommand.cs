@@ -15,7 +15,7 @@ namespace _Scripts.Commands.UnitCommands
             if (UnitStateController.CanPerformAction(UnitActionType.Move))
             {
                 UnitModel.SelectedAction = UnitActionType.Move;
-                new UpdateWalkableCellsCommand().InjectWith(injectionBinder).Execute();
+                new UpdateWalkableTilesCommand().InjectWith(injectionBinder).Execute();
             }
             else
             {

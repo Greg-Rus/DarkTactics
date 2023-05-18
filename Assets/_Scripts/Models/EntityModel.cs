@@ -3,7 +3,7 @@
     public class EntityModel
     {
         public int Id;
-        public GridCellModel OccupiedCellModel;
+        public TileModel OccupiedTileModel;
         public EntityType EntityType;
     }
 }

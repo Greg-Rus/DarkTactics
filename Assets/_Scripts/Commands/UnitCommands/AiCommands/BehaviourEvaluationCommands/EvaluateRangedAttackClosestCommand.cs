@@ -28,7 +28,7 @@ namespace _Scripts.Commands.UnitCommands.AiCommands
                     Score = _aiBehaviour.Score,
                     ActionType = UnitActionType.Attack,
                     TargetUnitId = closestUnit.EntityId,
-                    TargetGridCellCoordinates = closestUnit.Position
+                    TargetTileCoordinates = closestUnit.Position
                 };
             }
             

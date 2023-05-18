@@ -45,7 +45,11 @@ MonoBehaviour:
     AttackDamageEffect: {fileID: 11400000, guid: 9a6a51fdbbf259240a8b6fcdb0795b94,
       type: 2}
     Actions: 0100000002000000
-    AiBehaviours: []
+    AiBehaviours:
+    - Behaviour: 0
+      Score: 1
+    - Behaviour: 1
+      Score: 10
     BaseHitPoints: 5
     BaseActionPoints: 2
     BaseSpellPoints: 9

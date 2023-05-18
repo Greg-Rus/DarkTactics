@@ -13,15 +13,15 @@ namespace _Scripts
         [Inject] public GameContextRoot GameContextRoot { get; set; }
         private int _gridWidth;
         private int _gridHeight;
-        private float _gridCellSize;
-        private GridCellModel[,] _gridCellModelMap;
+        private float _tileSize;
+        private TileModel[,] _tileModelMap;
 
-        public GridService(int width, int height, float cellSize)
+        public GridService(int width, int height, float tileSize)
         {
             _gridWidth = width;
             _gridHeight = height;
-            _gridCellSize = cellSize;
-            _gridCellModelMap = new GridCellModel[width, height];
+            _tileSize = tileSize;
+            _tileModelMap = new TileModel[width, height];
         }
 
         public void Initialize()
@@ -30,32 +30,32 @@ namespace _Scripts
             {
                 for (int z = 0; z < _gridHeight; z++)
                 {
-                    var cellCoordinates = new Vector2Int(x, z);
-                    var cellPosition = GridCoordinateToWorldPosition(cellCoordinates);
-                    var debugObject = GameObject.Instantiate(GameContextRoot.DebugGridCellMarker, cellPosition,
+                    var tileCoordinates = new Vector2Int(x, z);
+                    var tilePosition = GridCoordinateToWorldPosition(tileCoordinates);
+                    var debugObject = GameObject.Instantiate(GameContextRoot.DebugTileMarker, tilePosition,
                         Quaternion.identity);
                     debugObject.transform.SetParent(GameContextRoot.DebugRoot);
                     debugObject.CoordiantesText.text = $"{x}:{z}";
-                    _gridCellModelMap[x, z] = new GridCellModel(cellCoordinates);
+                    _tileModelMap[x, z] = new TileModel(tileCoordinates);
                 }
             }
         }
 
         public Vector2Int WorldPositionToGridCoordinate(Vector3 worldPosition)
         {
-            var gridCoordinate = new Vector2Int(Mathf.RoundToInt(worldPosition.x / _gridCellSize),
-                Mathf.RoundToInt(worldPosition.z / _gridCellSize));
+            var gridCoordinate = new Vector2Int(Mathf.RoundToInt(worldPosition.x / _tileSize),
+                Mathf.RoundToInt(worldPosition.z / _tileSize));
 
             return gridCoordinate;
         }
 
         [CanBeNull]
-        public GridCellModel GridCoordinateToGridCellModel(Vector2Int gridCoordinate)
+        public TileModel GridCoordinateToTileModel(Vector2Int gridCoordinate)
         {
-            if (IsValidGridCellCoordinate(gridCoordinate))
+            if (IsValidTileCoordinate(gridCoordinate))
             {
-                var gridCell = _gridCellModelMap[gridCoordinate.x, gridCoordinate.y];
-                return gridCell;
+                var tile = _tileModelMap[gridCoordinate.x, gridCoordinate.y];
+                return tile;
             }
             else
             {
@@ -63,7 +63,7 @@ namespace _Scripts
             }
         }
 
-        public bool IsValidGridCellCoordinate(Vector2Int coordinate)
+        public bool IsValidTileCoordinate(Vector2Int coordinate)
         {
             return coordinate.x >= 0 &&
                    coordinate.x < _gridWidth &&
@@ -72,53 +72,53 @@ namespace _Scripts
         }
 
         [CanBeNull]
-        public GridCellModel WorldPositionToGridCellModel(Vector3 worldPosition)
+        public TileModel WorldPositionToTileModel(Vector3 worldPosition)
         {
             var gridCoordinate = WorldPositionToGridCoordinate(worldPosition);
-            return GridCoordinateToGridCellModel(gridCoordinate);
+            return GridCoordinateToTileModel(gridCoordinate);
         }
 
-        public Vector3 GridCoordinateToWorldPosition(Vector2Int cellCoordinates)
+        public Vector3 GridCoordinateToWorldPosition(Vector2Int tileCoordinates)
         {
-            return new Vector3(cellCoordinates.x, 0f, cellCoordinates.y) * _gridCellSize;
+            return new Vector3(tileCoordinates.x, 0f, tileCoordinates.y) * _tileSize;
         }
 
-        public GridCellModel[,] GetCellsInRange(int range, Vector2Int originCell, Func<GridCellModel, bool> walkableCondition = null)
+        public TileModel[,] GetTilesInRange(int range, Vector2Int originTile, Func<TileModel, bool> walkableCondition = null)
         {
-            var cells = new GridCellModel[range * 2 + 1, range * 2 + 1];
+            var tiles = new TileModel[range * 2 + 1, range * 2 + 1];
 
             for (int x = -range; x < range + 1; x++)
             {
                 for (int y = -range; y < range + 1; y++)
                 {
-                    var cell = new Vector2Int(originCell.x + x, originCell.y + y);
+                    var tile = new Vector2Int(originTile.x + x, originTile.y + y);
 
-                    if (!IsValidGridCellCoordinate(cell))
+                    if (!IsValidTileCoordinate(tile))
                     {
                         continue;
                     }
 
-                    var directionToCell = cell - originCell;
+                    var directionToTile = tile - originTile;
 
-                    if (directionToCell.magnitude > range)
+                    if (directionToTile.magnitude > range)
                     {
                         continue;
                     }
 
-                    var cellModel = GridCoordinateToGridCellModel(cell);
-                    if (walkableCondition != null && cellModel != null && walkableCondition.Invoke(cellModel) == false)
+                    var tileModel = GridCoordinateToTileModel(tile);
+                    if (walkableCondition != null && tileModel != null && walkableCondition.Invoke(tileModel) == false)
                     {
-                        cellModel = null;
+                        tileModel = null;
                     }
 
-                    cells[x + range, y + range] = cellModel;
+                    tiles[x + range, y + range] = tileModel;
                 }
             }
 
-            return cells;
+            return tiles;
         }
         
-        public List<Vector2Int> GetCellCoordinatesInRange(int range, Vector2Int originCell, Func<GridCellModel, bool> cellModelPassFilter = null)
+        public List<Vector2Int> GetTileCoordinatesInRange(int range, Vector2Int originTile, Func<TileModel, bool> tileModelPassFilter = null)
         {
             var result = new List<Vector2Int>();
 
@@ -126,30 +126,30 @@ namespace _Scripts
             {
                 for (int y = -range; y < range + 1; y++)
                 {
-                    var cell = new Vector2Int(originCell.x + x, originCell.y + y);
+                    var tile = new Vector2Int(originTile.x + x, originTile.y + y);
                     
-                    if (!IsValidGridCellCoordinate(cell))
+                    if (!IsValidTileCoordinate(tile))
                     {
                         continue;
                     }
 
-                    var directionToCell = cell - originCell;
+                    var directionToTile = tile - originTile;
 
-                    if (directionToCell.magnitude > range)
+                    if (directionToTile.magnitude > range)
                     {
                         continue;
                     }
 
-                    if (cellModelPassFilter != null)
+                    if (tileModelPassFilter != null)
                     {
-                        var cellModel = GridCoordinateToGridCellModel(cell);
-                        if (cellModel == null || cellModelPassFilter.Invoke(cellModel) == false)
+                        var tileModel = GridCoordinateToTileModel(tile);
+                        if (tileModel == null || tileModelPassFilter.Invoke(tileModel) == false)
                         {
                             continue;
                         }
                     }
 
-                    result.Add(cell);
+                    result.Add(tile);
                 }
             }
 
@@ -159,11 +159,11 @@ namespace _Scripts
         public Vector2 GetUnitCoordinatesByUnitId(int unitId)
         {
             var coordinates = Vector2.one * -1;
-            foreach (var cell in _gridCellModelMap)
+            foreach (var tile in _tileModelMap)
             {
-                if(cell.Entities.Contains(unitId))
+                if(tile.Entities.Contains(unitId))
                 {
-                    coordinates = cell.Coordinates;
+                    coordinates = tile.Coordinates;
                     break;
                 }
             }
@@ -171,51 +171,51 @@ namespace _Scripts
             return coordinates;
         }
 
-        public List<Vector2Int> GetAdjacentGridCells(Vector2Int position)
+        public List<Vector2Int> GetAdjacentTiles(Vector2Int position)
         {
-            var cells = new List<Vector2Int>();
+            var tiles = new List<Vector2Int>();
             for (int x = -1; x <= 1; x++)
             {
                 for (int y = -1; y < 1; y++)
                 {
                     if(x == 0 && y == 0 ) continue;
-                    if (IsValidGridCellCoordinate(position))
+                    if (IsValidTileCoordinate(position))
                     {
-                        cells.Add(new Vector2Int(x, y));
+                        tiles.Add(new Vector2Int(x, y));
                     }
                 }
             }
 
-            return cells;
+            return tiles;
         }
 
-        public Vector2Int? GetClosestAdjacentCellTowards(Vector2Int position)
+        public Vector2Int? GetClosestAdjacentTileTowards(Vector2Int position)
         {
-            var adjacentCells = GetAdjacentGridCells(position);
-            if (adjacentCells.Count == 0) return null;
-            if (adjacentCells.Count == 1) return adjacentCells[0];
+            var adjacentTiles = GetAdjacentTiles(position);
+            if (adjacentTiles.Count == 0) return null;
+            if (adjacentTiles.Count == 1) return adjacentTiles[0];
 
-            return GetClosestCellInRangeTowardsTarget(adjacentCells, position);
+            return GetClosestTileInRangeTowardsTarget(adjacentTiles, position);
         }
 
-        public Vector2Int GetClosestCellInRangeTowardsTarget(IEnumerable<Vector2Int> range, Vector2Int target)
+        public Vector2Int GetClosestTileInRangeTowardsTarget(IEnumerable<Vector2Int> range, Vector2Int target)
         {
-            Vector2Int closestCell = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
+            Vector2Int closestTile = new Vector2Int(Int32.MaxValue, Int32.MaxValue);
             float shortestDistance = float.MaxValue;
 
-            foreach (var cell in range)
+            foreach (var tile in range)
             {
-                if(cell == target) continue;
+                if(tile == target) continue;
                 
-                var distance = (cell - target).sqrMagnitude;
+                var distance = (tile - target).sqrMagnitude;
                 if (distance < shortestDistance)
                 {
                     shortestDistance = distance;
-                    closestCell = cell;
+                    closestTile = tile;
                 }
             }
 
-            return closestCell;
+            return closestTile;
         }
     }
 }

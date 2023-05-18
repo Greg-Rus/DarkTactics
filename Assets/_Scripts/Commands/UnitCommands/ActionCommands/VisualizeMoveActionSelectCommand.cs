@@ -11,7 +11,7 @@ namespace _Scripts.Commands.UnitCommands
 
         public override void Execute()
         {
-            GridVisualsService.DrawWalkableGrid(UnitModel.ActionRangeCells);
+            GridVisualsService.DrawWalkableGrid(UnitModel.ActionRangeTiles);
             UiController.HighlightSelectedAction(UnitActionType.Move);
         }
     }

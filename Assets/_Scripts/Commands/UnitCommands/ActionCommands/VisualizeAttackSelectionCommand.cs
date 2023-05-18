@@ -13,7 +13,7 @@ namespace _Scripts.Commands.UnitCommands
         {
             //new UpdateUnitUiCommand().InjectWith(injectionBinder).Execute(); TODO: Not sure if necessary.
             UiController.HighlightSelectedAction(UnitActionType.Attack);
-            GridVisualsService.DrawAttacableGrid(UnitModel.ActionRangeCells);
+            GridVisualsService.DrawAttacableGrid(UnitModel.ActionRangeTiles);
         }
     }
 }

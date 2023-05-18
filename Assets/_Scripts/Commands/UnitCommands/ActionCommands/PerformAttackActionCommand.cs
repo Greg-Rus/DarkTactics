@@ -10,31 +10,33 @@ namespace _Scripts.Commands.UnitCommands
 {
     public class PerformAttackActionCommand : EventCommand<AttackActionPayload>
     {
-        [Inject] public UnitContextRoot RootView { get; set; }
+        [Inject] public UnitContextRoot RootView { private get; set; }
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public ProjectileFactory ProjectileFactory { private get; set; }
 
+        [Inject] public ConstantsConfig ConstantsConfig { private get; set; }
+
         private bool shootEventReceived = false;
         private bool attackEndEventReceived = false;
-        private bool isAttacking = false;
-        
+
         public override void Execute()
         {
             Debug.Log($"{LogHelper.ActionTag} Attacking...");
-            Retain();
             RootView.StartCoroutine(DoAttack(Payload.TargetTransform));
         }
 
         private IEnumerator DoAttack(Transform target)
         {
-            isAttacking = true;
+            Retain();
+            UnitModel.IsAttacking = true;
 
             yield return new RotateToWorldPositionCommandAsync(Payload.TargetTransform.position)
                 .InjectWith(injectionBinder).Execute();
             yield return AnimateAttackAndWait();
             yield return SpawnAttackAndWait(target);
             
-            isAttacking = false;
+            UnitModel.IsAttacking = false;
+            Release();
         }
 
         private IEnumerator AnimateAttackAndWait()
@@ -53,7 +55,10 @@ namespace _Scripts.Commands.UnitCommands
         private IEnumerator SpawnAttackAndWait(Transform target)
         {
             var projectile = ProjectileFactory.SpawnProjectile();
-            projectile.Init(UnitModel.Settings.AttackDamageEffect);
+            var projectileLayer = UnitModel.EntityType == EntityType.PlayerUnit
+                ? ConstantsConfig.PlayerProjectileLayer
+                : ConstantsConfig.EnemyProjectileLayer;
+            projectile.Init(UnitModel.Settings.AttackDamageEffect, projectileLayer);
             projectile.transform.position = RootView.RightHandSpawnPoint.position;
             var targetPosition = target.position + Vector3.up * RootView.RightHandSpawnPoint.position.y;
             projectile.transform.LookAt(targetPosition);
@@ -67,16 +72,15 @@ namespace _Scripts.Commands.UnitCommands
         {
             dispatcher.RemoveListener(AnimationEvents.AttackFinished, OnAttackFinishedEvent);
             attackEndEventReceived = true;
-            Release();
         }
 
-        private bool IsCellInRange(Vector2 coordinates)
+        private bool IsTileInRange(Vector2 coordinates)
         {
             var isInRange = false;
-            foreach (var cellModel in UnitModel.ActionRangeCells)
+            foreach (var tileModel in UnitModel.ActionRangeTiles)
             {
-                if (cellModel == null) continue;
-                if (cellModel.Coordinates == coordinates)
+                if (tileModel == null) continue;
+                if (tileModel.Coordinates == coordinates)
                 {
                     isInRange = true;
                     break;

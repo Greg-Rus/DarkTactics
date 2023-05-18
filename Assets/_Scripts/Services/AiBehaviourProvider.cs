@@ -21,7 +21,6 @@ namespace _Scripts.Services
                     return new EvaluateMoveToFiringRangeOfClosestPlayerUnitCommand(aiBehaviour);
                 case AiBehaviourType.ProjectileAttack:
                     return new EvaluateRangedAttackClosestCommand(aiBehaviour);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(aiBehaviour), aiBehaviour, $"No evaluators defined for {aiBehaviour}");
             }

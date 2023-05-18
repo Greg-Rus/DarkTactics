@@ -85,6 +85,7 @@ MonoBehaviour:
   SelectionMarker: {fileID: 78132703760989453}
   AnimationEventHandler: {fileID: 3046945798487990998}
   RightHandSpawnPoint: {fileID: 8221677000467638940}
+  BoundsCollider: {fileID: 4568220207428885150}
 --- !u!54 &8127150126861889350
 Rigidbody:
   m_ObjectHideFlags: 0

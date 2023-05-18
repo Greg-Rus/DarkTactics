@@ -10,5 +10,6 @@ namespace _Scripts
         public GameObject SelectionMarker;
         public AnimationEventHandler AnimationEventHandler;
         public Transform RightHandSpawnPoint;
+        public Collider BoundsCollider;
     }
 }

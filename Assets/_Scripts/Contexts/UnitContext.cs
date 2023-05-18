@@ -53,7 +53,7 @@ namespace _Scripts
                 .To<VisualizeAttackSelectionCommand>()
                 .InSequence();
             //Action Execution
-            commandBinder.Bind(UnitEvents.GridCellSelected)
+            commandBinder.Bind(UnitEvents.TileSelected)
                 .To<CanPerformMoveActionCommand>()
                 .To<ConsumeResourcesForMoveActionCommand>()
                 .To<BeginActionCommand>()

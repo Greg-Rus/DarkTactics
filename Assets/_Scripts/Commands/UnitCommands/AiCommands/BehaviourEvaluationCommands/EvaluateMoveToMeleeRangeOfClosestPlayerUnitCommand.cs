@@ -24,16 +24,16 @@ namespace _Scripts.Commands.UnitCommands.AiCommands
                 .InjectWith(injectionBinder)
                 .Execute();
 
-            var cellsInMoveRange = GridService.GetCellCoordinatesInRange(UnitModel.Settings.MovementRange,
-                UnitModel.OccupiedCellModel.Coordinates);
-            var destinationCell =
-                GridService.GetClosestCellInRangeTowardsTarget(cellsInMoveRange, closestUnit.Position);
+            var tilesInMoveRange = GridService.GetTileCoordinatesInRange(UnitModel.Settings.MovementRange,
+                UnitModel.OccupiedTileModel.Coordinates);
+            var destinationTile =
+                GridService.GetClosestTileInRangeTowardsTarget(tilesInMoveRange, closestUnit.Position);
 
             return new AiAction()
             {
                 Score = _behaviour.Score,
                 ActionType = UnitActionType.Move,
-                TargetGridCellCoordinates = destinationCell,
+                TargetTileCoordinates = destinationTile,
                 TargetUnitId = closestUnit.EntityId
             };
         }

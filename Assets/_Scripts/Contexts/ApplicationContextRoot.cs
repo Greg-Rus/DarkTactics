@@ -11,6 +11,7 @@ namespace _Scripts
         public PrefabConfig PrefabConfig;
         public UnitSettingsConfig UnitSettingsConfig;
         public ActionSettingsConfig ActionSettingsConfig;
+        public ConstantsConfig ConstantsConfig;
         // Start is called before the first frame update
         void Awake()
         {

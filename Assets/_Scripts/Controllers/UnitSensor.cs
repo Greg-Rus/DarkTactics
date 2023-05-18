@@ -9,29 +9,29 @@ namespace _Scripts.Controllers
 
         [Inject] public GridService GridService { private get; set; }
         
-        public bool IsCellWalkable(GridCellModel cell)
+        public bool IsTileWalkable(TileModel tile)
         {
-            return cell.Entities.Count == 0;
+            return tile.Entities.Count == 0;
         }
 
-        public bool IsCellInRange(GridCellModel cell)
+        public bool IsTileInRange(TileModel tile)
         {
-            return IsCellInRange(cell.Coordinates);
+            return IsTileInRange(tile.Coordinates);
         }
 
-        public bool IsCellInRange(Vector2 cellCoordinates)
+        public bool IsTileInRange(Vector2 tileCoordinates)
         {
-            var isCellInRange = false;
-            foreach (var cellModel in UnitModel.ActionRangeCells)
+            var isTileInRange = false;
+            foreach (var tileModel in UnitModel.ActionRangeTiles)
             {
-                if(cellModel == null) continue;
-                if (cellModel.Coordinates != cellCoordinates) continue;
+                if(tileModel == null) continue;
+                if (tileModel.Coordinates != tileCoordinates) continue;
                 
-                isCellInRange = true;
+                isTileInRange = true;
                 break;
             }
 
-            return isCellInRange;
+            return isTileInRange;
         }
     }
 }

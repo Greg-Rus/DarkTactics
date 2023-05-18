@@ -15,15 +15,17 @@ namespace _Scripts.Commands
         public override void Execute()
         {
             if (!GameSessionModel.SelectedUnitId.HasValue) return;
-            var enemyId = EntityRegistryService.GetEntityIdByTransform(Payload.TargetTransform);
-            var enemyCoordinate = GridService.GetUnitCoordinatesByUnitId(enemyId);
+            var enemyId = EntityRegistryService.TryGetEntityIdByTransform(Payload.TargetTransform);
+            if (enemyId.HasValue == false) return;
+            
+            var enemyCoordinate = GridService.GetUnitCoordinatesByUnitId(enemyId.Value);
                 
             EntityRegistryService.GetFasadeById(GameSessionModel.SelectedUnitId.Value)
                 .EventDispatcher
                 .Dispatch(UnitEvents.EnemySelected, new AttackActionPayload()
                 {
                     TargetTransform = Payload.TargetTransform,
-                    TargetId = enemyId,
+                    TargetId = enemyId.Value,
                     TargetCoordinates = enemyCoordinate
                 });
         }

@@ -21,14 +21,14 @@ namespace _Scripts.Commands.UnitCommands.AiCommands
 
         public override void Execute()
         {
-            Debug.Log($"{LogHelper.AITag}: Attack");
+            Debug.Log($"{LogHelper.AITag}: Attack, target: {_action.TargetUnitId.Value} at {EntityRegistryService.GetFasadeById(_action.TargetUnitId.Value).EntityModel.OccupiedTileModel.Coordinates}");
             
             EventDispatcher.Dispatch(InputEvents.AttackActionSelected);
             EventDispatcher.Dispatch(UnitEvents.EnemySelected, new AttackActionPayload()
             {
                 TargetTransform = EntityRegistryService.GetTransformByEntityId(_action.TargetUnitId.Value),
                 TargetId = _action.TargetUnitId.Value,
-                TargetCoordinates = _action.TargetGridCellCoordinates.Value
+                TargetCoordinates = _action.TargetTileCoordinates.Value
             });        }
 
         

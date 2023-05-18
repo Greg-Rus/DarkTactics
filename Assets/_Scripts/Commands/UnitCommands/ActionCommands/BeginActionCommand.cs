@@ -14,9 +14,9 @@ namespace _Scripts.Commands.UnitCommands
         
         public override void Execute()
         {
-            Debug.Log($"{LogHelper.ActionTag} Begin:  {UnitModel.SelectedAction}");
+            Debug.Log($"{LogHelper.ActionTag} Begin:  {UnitModel.SelectedAction}. Unit ID: {UnitModel.Id}");
             GridVisualsService.ClearGrid();
-            UnitModel.ActionRangeCells = new GridCellModel[0,0];
+            UnitModel.ActionRangeTiles = new TileModel[0,0];
             UiController.SetActionInProgressUi(true);
         }
     }

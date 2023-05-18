@@ -1,4 +1,5 @@
-﻿using _Scripts.Models;
+﻿using _Scripts.Helpers;
+using _Scripts.Models;
 using strange.extensions.command.impl;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace _Scripts.Commands.UnitCommands
             UnitModel.State.HitPoints = math.max(0, UnitModel.State.HitPoints - Payload.Damage);
             if (UnitModel.State.HitPoints == 0)
             {
-                Animator.SetTrigger(AnimationConstants.Die);
+                new DieCommand().InjectWith(injectionBinder).Execute();
             }
             else
             {

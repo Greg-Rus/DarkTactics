@@ -3,17 +3,17 @@ using strange.extensions.command.impl;
 
 namespace _Scripts.Commands
 {
-    public class UpdateAttackRangeCellsCommand : Command
+    public class UpdateAttackRangeTilesCommand : Command
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public GridService GridService { private get; set; }
 
         public override void Execute()
         {
-            UnitModel.ActionRangeCells = GridService.GetCellsInRange(UnitModel.Settings.AttackRange, UnitModel.OccupiedCellModel.Coordinates, IsCellAttackable);
+            UnitModel.ActionRangeTiles = GridService.GetTilesInRange(UnitModel.Settings.AttackRange, UnitModel.OccupiedTileModel.Coordinates, IsTileAttackable);
         }
 
-        private bool IsCellAttackable(GridCellModel cell)
+        private bool IsTileAttackable(TileModel tile)
         {
             return true;
         }

@@ -12,7 +12,8 @@ namespace _Scripts.Commands.UnitCommands
         [Inject] public UnitSensor UnitSensor { private get; set; }
         public override void Execute()
         {
-            if (IsSelectedActionAttack &&
+            if (UnitStateController.IsAlive &&
+                IsSelectedActionAttack &&
                 IsAlreadyAttacking == false &&
                 HasEnoughActionPointsToAttack &&
                 IsTargetInRange)
@@ -25,6 +26,6 @@ namespace _Scripts.Commands.UnitCommands
         private bool IsSelectedActionAttack => UnitModel.SelectedAction == UnitActionType.Attack;
         private bool IsAlreadyAttacking => UnitModel.IsAttacking;
         private bool HasEnoughActionPointsToAttack => UnitStateController.CanPerformAction(UnitActionType.Attack);
-        private bool IsTargetInRange => UnitSensor.IsCellInRange(Payload.TargetCoordinates);
+        private bool IsTargetInRange => UnitSensor.IsTileInRange(Payload.TargetCoordinates);
     }
 }

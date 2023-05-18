@@ -12,14 +12,17 @@ namespace _Scripts.Views
         private DamageEffectConfig _damageEffect;
 
 
-        public void Init(DamageEffectConfig damageEffect)
+        public void Init(DamageEffectConfig damageEffect, int projectileLayer)
         {
             _damageEffect = damageEffect;
+            gameObject.layer = projectileLayer;
         }
 
         void OnCollisionEnter(Collision collision)
         {
-            var hitUnit = EntityRegistryService.GetFasadeByTransform(collision.collider.transform);
+            var hitUnit = EntityRegistryService.TryGetFasadeByTransform(collision.collider.transform);
+            if (hitUnit == null) return;
+            
             hitUnit.EventDispatcher.Dispatch(UnitEvents.HitTaken, _damageEffect);
             Destroy(gameObject);
         }

@@ -18,12 +18,12 @@ namespace _Scripts.Commands
                 return;
             }
             
-            var gridCellModel = GridService.WorldPositionToGridCellModel(Payload.ClickPosition);
+            var tileModel = GridService.WorldPositionToTileModel(Payload.ClickPosition);
 
-            if (gridCellModel == null) return;
+            if (tileModel == null) return;
 
             var unit = EntityRegistryService.GetFasadeById(GameSessionModel.SelectedUnitId.Value);
-            unit.EventDispatcher.Dispatch(UnitEvents.GridCellSelected, gridCellModel);
+            unit.EventDispatcher.Dispatch(UnitEvents.TileSelected, tileModel);
         }
     }
 }

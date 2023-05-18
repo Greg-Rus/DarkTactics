@@ -30,8 +30,8 @@ namespace _Scripts.Commands.UnitCommands.AiCommands
             {
                 var playerUnitPosition = EntityRegistryService.GetFasadeById(id);
 
-                var otherEntityPosition = playerUnitPosition.EntityModel.OccupiedCellModel.Coordinates;
-                var thisEntityPosition = UnitModel.OccupiedCellModel.Coordinates;
+                var otherEntityPosition = playerUnitPosition.EntityModel.OccupiedTileModel.Coordinates;
+                var thisEntityPosition = UnitModel.OccupiedTileModel.Coordinates;
                 var distance = (thisEntityPosition - otherEntityPosition).magnitude;
 
                 if (distance < result.Distance)

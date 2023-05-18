@@ -14,7 +14,7 @@ namespace _Scripts.Commands.UnitCommands
         public override void Execute()
         {
             UnitModel.SelectedAction = UnitActionType.Attack;
-            new UpdateAttackRangeCellsCommand().InjectWith(injectionBinder).Execute();
+            new UpdateAttackRangeTilesCommand().InjectWith(injectionBinder).Execute();
         }
     }
 }

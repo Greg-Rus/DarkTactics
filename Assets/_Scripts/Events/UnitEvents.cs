@@ -5,7 +5,7 @@
         SetupUnit,
         UnitSelected,
         EnemySelected,
-        GridCellSelected,
+        TileSelected,
         TurnStarted,
         HitTaken,
         ActionEnded,

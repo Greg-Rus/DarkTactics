@@ -23,7 +23,7 @@ namespace _Scripts
         }
 
         public GameObject DebugMousePointer => _view.DebugMousePointer;
-        public DebugGridCellView DebugGridCellMarker => _view.DebugGridCellMarker;
+        public DebugTileView DebugTileMarker => _view.DebugTileMarker;
 
         public LayerMask GroundLayerMask => _view.GroundLayerMask;
         public LayerMask UnitLayerMask => _view.UnitLayerMask;

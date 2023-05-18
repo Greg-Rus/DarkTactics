@@ -3,19 +3,19 @@ using strange.extensions.command.impl;
 
 namespace _Scripts.Commands
 {
-    public class UpdateWalkableCellsCommand : Command
+    public class UpdateWalkableTilesCommand : Command
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public GridService GridService { private get; set; }
 
         public override void Execute()
         {
-            UnitModel.ActionRangeCells = GridService.GetCellsInRange(UnitModel.Settings.MovementRange, UnitModel.OccupiedCellModel.Coordinates, IsCellWalkable);
+            UnitModel.ActionRangeTiles = GridService.GetTilesInRange(UnitModel.Settings.MovementRange, UnitModel.OccupiedTileModel.Coordinates, IsTileWalkable);
         }
 
-        private bool IsCellWalkable(GridCellModel cell)
+        private bool IsTileWalkable(TileModel tile)
         {
-            return cell.Entities.Count == 0;
+            return tile.Entities.Count == 0;
         }
     }
 }

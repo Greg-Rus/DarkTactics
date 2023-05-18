@@ -37,14 +37,34 @@ namespace _Scripts
             }
         }
 
+        public void DeregisterEntityFasade(EntityFasade fasade)
+        {
+            _entityIdToFasadeDictionary.Remove(fasade.EntityModel.Id);
+            _transformToEntityDictionary.Remove(fasade.Transform);
+            switch (fasade.EntityModel.EntityType)
+            {
+                case EntityType.PlayerUnit:
+                    _playerUnitIds.Remove(fasade.EntityModel.Id);
+                    break;
+                case EntityType.EnemyUnit:
+                    _enemyUnitIds.Remove(fasade.EntityModel.Id);
+                    break;
+            }
+        }
+
         public EntityFasade GetFasadeById(int unitId)
         {
             return _entityIdToFasadeDictionary[unitId];
         }
         
-        public int GetEntityIdByTransform(Transform transform)
+        public int? TryGetEntityIdByTransform(Transform transform)
         {
-            return _transformToEntityDictionary[transform];
+            if(_transformToEntityDictionary.TryGetValue(transform, out var id))
+            {
+                return id;
+            }
+
+            return null;
         }
 
         public Transform GetTransformByEntityId(int id)
@@ -52,9 +72,10 @@ namespace _Scripts
             return GetFasadeById(id).Transform;
         }
         
-        public EntityFasade GetFasadeByTransform(Transform transform)
+        public EntityFasade TryGetFasadeByTransform(Transform transform)
         {
-            return  _entityIdToFasadeDictionary[GetEntityIdByTransform(transform)];
+            var id = TryGetEntityIdByTransform(transform);
+            return id.HasValue ? _entityIdToFasadeDictionary[id.Value] : null;
         }
 
         public IEnumerable<int> GetAllEntityIds()

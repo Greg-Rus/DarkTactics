@@ -13,7 +13,7 @@ namespace _Scripts.Commands.UnitCommands
         public override void Execute()
         {
             UnitModel.SelectedAction = UnitActionType.None;
-            UnitModel.ActionRangeCells = new GridCellModel[0,0];
+            UnitModel.ActionRangeTiles = new TileModel[0,0];
             GridVisualsService.ClearGrid();
             UiController.MoveActionButton.Highlight.gameObject.SetActive(false);
         }

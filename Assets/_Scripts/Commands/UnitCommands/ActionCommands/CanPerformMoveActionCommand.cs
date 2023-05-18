@@ -5,17 +5,18 @@ using strange.extensions.command.impl;
 
 namespace _Scripts.Commands.UnitCommands
 {
-    public class CanPerformMoveActionCommand : EventCommand<GridCellModel>
+    public class CanPerformMoveActionCommand : EventCommand<TileModel>
     {
         [Inject] public UnitModel UnitModel { private get; set; }
         [Inject] public UnitStateController UnitStateController { private get; set; }
         [Inject] public UnitSensor UnitSensor { private get; set; }
         public override void Execute()
         {
-            if (IsActionTypeMove &&
+            if (UnitStateController.IsAlive &&
+                IsActionTypeMove &&
                 HasEnoughActionPoints &&
-                DestinationCellIsWalkable &&
-                DestinationCellIsInRange)
+                DestinationTileIsWalkable &&
+                DestinationTileIsInRange)
             {
                 return;
             }
@@ -25,8 +26,8 @@ namespace _Scripts.Commands.UnitCommands
 
         private bool IsActionTypeMove => UnitModel.SelectedAction == UnitActionType.Move;
         private bool HasEnoughActionPoints => UnitStateController.CanPerformAction(UnitActionType.Move);
-        private bool DestinationCellIsWalkable => UnitSensor.IsCellWalkable(Payload);
-        private bool DestinationCellIsInRange => UnitSensor.IsCellInRange(Payload);
+        private bool DestinationTileIsWalkable => UnitSensor.IsTileWalkable(Payload);
+        private bool DestinationTileIsInRange => UnitSensor.IsTileInRange(Payload);
     }
 }
 

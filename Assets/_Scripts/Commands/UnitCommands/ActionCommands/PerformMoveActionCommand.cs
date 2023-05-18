@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace _Scripts.Commands
 {
-    public class PerformMoveActionCommand : EventCommand<GridCellModel>
+    public class PerformMoveActionCommand : EventCommand<TileModel>
     {
         [Inject]  public UnitContextRoot RootView {get;set;}
         [Inject] public GridService GridService {get;set;}
@@ -22,9 +22,9 @@ namespace _Scripts.Commands
             Debug.Log($"{LogHelper.ActionTag} Moving...");
             Retain();
             RootView.StopAllCoroutines();
-            var cellWorldPosition = GridService.GridCoordinateToWorldPosition(Payload.Coordinates);
-            RootView.StartCoroutine(MoveToPosition(cellWorldPosition));
-            RootView.StartCoroutine(RotateToPosition(cellWorldPosition));
+            var tileWorldPosition = GridService.GridCoordinateToWorldPosition(Payload.Coordinates);
+            RootView.StartCoroutine(MoveToPosition(tileWorldPosition));
+            RootView.StartCoroutine(RotateToPosition(tileWorldPosition));
         }
         
         private IEnumerator MoveToPosition(Vector3 destination)
@@ -73,14 +73,14 @@ namespace _Scripts.Commands
 
         private void OnDeparture()
         {
-            Model.OccupiedCellModel.Entities.Remove(Model.Id);
+            Model.OccupiedTileModel.Entities.Remove(Model.Id);
         }
 
         private void OnArrival(Vector3 destination)
         {
             RootView.Animator.SetBool(AnimationConstants.IsRunning, false);
-            Model.OccupiedCellModel = GridService.WorldPositionToGridCellModel(destination);
-            Model.OccupiedCellModel.Entities.Add(Model.Id);
+            Model.OccupiedTileModel = GridService.WorldPositionToTileModel(destination);
+            Model.OccupiedTileModel.Entities.Add(Model.Id);
             Release();
         }
     }

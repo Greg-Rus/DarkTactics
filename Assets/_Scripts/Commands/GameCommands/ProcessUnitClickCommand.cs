@@ -15,15 +15,16 @@ namespace _Scripts.Commands
         public override void Execute()
         {
             var payload = (MouseClickUnitPayload)evt.data;
-            var selectedUnitId = EntityRegistryService.GetEntityIdByTransform(payload.UnitTransform);
+            var selectedUnitId = EntityRegistryService.TryGetEntityIdByTransform(payload.UnitTransform);
+            if (selectedUnitId.HasValue == false) return;
 
-            TryDeselectOldUnit(selectedUnitId);
+            TryDeselectOldUnit(selectedUnitId.Value);
 
             UiController.ToggleUnitStats(true);
             UiController.ToggleActionsBar(true);
             UiController.ResetActionButtons();
             
-            SelectNewUnit(selectedUnitId);
+            SelectNewUnit(selectedUnitId.Value);
         }
 
         private void SelectNewUnit(int selectedUnitId)
